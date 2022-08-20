@@ -1,3 +1,5 @@
+origin: https://github.com/dotnet/Silk.NET
+
 <!-- Begin exclude from NuGet readme. -->
 <h1 align="center">
     <a href="#"><img align="center" src="documentation/readme/silkdotnet_v3_horizontal_96.svg"></a>
