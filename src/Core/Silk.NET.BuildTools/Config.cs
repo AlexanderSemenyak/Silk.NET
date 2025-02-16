@@ -1,6 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -14,7 +15,7 @@ namespace Silk.NET.BuildTools
         [JsonProperty("tasks")] public BindTask[] Tasks { get; set; }
     }
 
-    public struct BindTask
+    public class BindTask
     {
         // TODO the dishwasher
         [JsonProperty("profileName")] public string Name { get; set; }
@@ -32,15 +33,18 @@ namespace Silk.NET.BuildTools
         [JsonProperty("bakery")] public BakeryOptions BakeryOpts { get; set; }
         [JsonProperty("output")] public OutputOptions OutputOpts { get; set; }
         [JsonProperty("prefix")] public string FunctionPrefix { get; set; }
+        [JsonProperty("prefixOverrides")] public Dictionary<string, string> PrefixOverrides { get; set; } = new();
         [JsonProperty("namespace")] public string Namespace { get; set; }
         [JsonProperty("overloadExclusions")] public Dictionary<string, string[]>? OverloaderExclusions { get; set; }
         [JsonProperty("extensionsNamespace")] public string ExtensionsNamespace { get; set; }
         [JsonProperty("nameContainer")] public NameContainer NameContainer { get; set; }
-        [JsonProperty("typeMaps")] public List<Dictionary<string, string>> TypeMaps { get; set; }
+
+        [JsonProperty("typeMaps")] public List<Dictionary<string, string>> TypeMaps { get; set; } = new();
         // TODO the following 2 properties are only implemented in Clang. implement on ConvertConstruct?
-        [JsonProperty("exclude")] public List<string> ExcludedNativeNames { get; set; }
-        [JsonProperty("rename")] public Dictionary<string, string> RenamedNativeNames { get; set; }
-        [JsonProperty("copy")] public Dictionary<string, string> CopyFiles { get; set; }
+        [JsonProperty("exclude")] public List<string> ExcludedNativeNames { get; set; } = new();
+        [JsonProperty("rename")] public Dictionary<string, string> RenamedNativeNames { get; set; } = new();
+        [JsonProperty("copy")] public Dictionary<string, string> CopyFiles { get; set; } = new();
+        [JsonProperty("glIntAsPtr")] public Dictionary<string, string[]> IntAsPtr { get; set; } = new();
 
         public void InjectTypeMap(Dictionary<string, string> map)
             => TypeMaps.Insert
@@ -64,6 +68,7 @@ namespace Silk.NET.BuildTools
         [JsonProperty("args")] public string[] ClangArgs { get; set; }
         [JsonProperty("traverse")] public string[] Traverse { get; set; }
         [JsonProperty("classes")] public Dictionary<string, string> ClassMappings { get; set; }
+        [JsonProperty("comRefs")] public HashSet<string> ComRefs { get; set; }
     }
 
     public struct BakeryOptions
@@ -85,6 +90,13 @@ namespace Silk.NET.BuildTools
         /// </summary>
         [JsonProperty("path")]
         public string Folder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the folder within the base output path where the binder will write the generated files, with
+        /// the exception of the csproj.
+        /// </summary>
+        [JsonProperty("innerPath")]
+        public string? Subfolder { get; set; }
 
         /// <summary>
         /// Gets or sets the path to the license header.

@@ -9,12 +9,9 @@ using Silk.NET.Core.Attributes;
 
 namespace Silk.NET.Direct3D11
 {
-    [Flags]
     [NativeName("Name", "D3D11_VIDEO_DECODER_BUFFER_TYPE")]
     public enum VideoDecoderBufferType : int
     {
-        [NativeName("Name", "")]
-        None = 0,
         [Obsolete("Deprecated in favour of \"PictureParameters\"")]
         [NativeName("Name", "D3D11_VIDEO_DECODER_BUFFER_PICTURE_PARAMETERS")]
         VideoDecoderBufferPictureParameters = 0x0,
@@ -42,6 +39,9 @@ namespace Silk.NET.Direct3D11
         [Obsolete("Deprecated in favour of \"FilmGrain\"")]
         [NativeName("Name", "D3D11_VIDEO_DECODER_BUFFER_FILM_GRAIN")]
         VideoDecoderBufferFilmGrain = 0x8,
+        [Obsolete("Deprecated in favour of \"HuffmanTable\"")]
+        [NativeName("Name", "D3D11_VIDEO_DECODER_BUFFER_HUFFMAN_TABLE")]
+        VideoDecoderBufferHuffmanTable = 0x9,
         [NativeName("Name", "D3D11_VIDEO_DECODER_BUFFER_PICTURE_PARAMETERS")]
         PictureParameters = 0x0,
         [NativeName("Name", "D3D11_VIDEO_DECODER_BUFFER_MACROBLOCK_CONTROL")]
@@ -60,5 +60,7 @@ namespace Silk.NET.Direct3D11
         MotionVector = 0x7,
         [NativeName("Name", "D3D11_VIDEO_DECODER_BUFFER_FILM_GRAIN")]
         FilmGrain = 0x8,
+        [NativeName("Name", "D3D11_VIDEO_DECODER_BUFFER_HUFFMAN_TABLE")]
+        HuffmanTable = 0x9,
     }
 }

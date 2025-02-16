@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -39,22 +39,22 @@ namespace Silk.NET.BuildTools.Bind
             sw.WriteLine($"    internal class {task.Task.NameContainer.ClassName} : SearchPathContainer");
             sw.WriteLine("    {");
             sw.WriteLine("        /// <inheritdoc />");
-            sw.WriteLine($"        public override string Linux => \"{task.Task.NameContainer.Linux}\";");
+            sw.WriteLine($"        public override string[] Linux => new[] {{ \"{task.Task.NameContainer.Linux}\" }};");
             sw.WriteLine();
             sw.WriteLine("        /// <inheritdoc />");
-            sw.WriteLine($"        public override string MacOS => \"{task.Task.NameContainer.MacOS}\";");
+            sw.WriteLine($"        public override string[] MacOS => new[] {{ \"{task.Task.NameContainer.MacOS}\" }};");
             sw.WriteLine();
             sw.WriteLine("        /// <inheritdoc />");
-            sw.WriteLine($"        public override string Android => \"{task.Task.NameContainer.Android}\";");
+            sw.WriteLine($"        public override string[] Android => new[] {{ \"{task.Task.NameContainer.Android}\" }};");
             sw.WriteLine();
             sw.WriteLine("        /// <inheritdoc />");
-            sw.WriteLine($"        public override string IOS => \"{task.Task.NameContainer.IOS}\";");
+            sw.WriteLine($"        public override string[] IOS => new[] {{ \"{task.Task.NameContainer.IOS}\" }};");
             sw.WriteLine();
             sw.WriteLine("        /// <inheritdoc />");
-            sw.WriteLine($"        public override string Windows64 => \"{task.Task.NameContainer.Windows64}\";");
+            sw.WriteLine($"        public override string[] Windows64 => new[] {{ \"{task.Task.NameContainer.Windows64}\" }};");
             sw.WriteLine();
             sw.WriteLine("        /// <inheritdoc />");
-            sw.WriteLine($"        public override string Windows86 => \"{task.Task.NameContainer.Windows86}\";");
+            sw.WriteLine($"        public override string[] Windows86 => new[] {{ \"{task.Task.NameContainer.Windows86}\" }};");
             sw.WriteLine("    }");
             sw.WriteLine("}");
         }
@@ -65,7 +65,7 @@ namespace Silk.NET.BuildTools.Bind
         /// <param name="project">The current project.</param>
         /// <param name="profile">The profile to write mixed-mode classes for.</param>
         /// <param name="folder">The folder to store the generated classes in.</param>
-        public static void WriteMixedModeClasses(this Project project, Profile profile, string folder, BindState task)
+        public static void WriteMixedModeClasses(this Project project, Profile profile, string folder, string manualFolder, BindState task)
         {
             // public abstract class MixedModeClass : IMixedModeClass
             // {
@@ -84,8 +84,12 @@ namespace Silk.NET.BuildTools.Bind
                 {
                     var allFunctions = @class.NativeApis.SelectMany
                             (x => x.Value.Functions)
-                        .RemoveDuplicates()
+                        .RemoveDuplicatesFast(GetSignature)
                         .ToArray();
+
+                    static string GetSignature(Function func) 
+                        => func.ToString(null, returnType: false, appendAttributes: false);
+
                     var sw = new StreamWriter(Path.Combine(folder, $"{@class.ClassName}.gen.cs")) {NewLine = "\n"};
                     StreamWriter? swOverloads = null;
                     sw.Write(task.LicenseText());
@@ -136,7 +140,7 @@ namespace Silk.NET.BuildTools.Bind
                             }
                         }
 
-                        foreach (var attr in function.Attributes)
+                        foreach (var attr in function.GetAttributes())
                         {
                             sw.WriteLine($"        [{attr.Name}({string.Join(", ", attr.Arguments)})]");
                         }
@@ -172,7 +176,7 @@ namespace Silk.NET.BuildTools.Bind
                         sw.WriteLine();
                     }
 
-                    foreach (var overload in Overloader.GetOverloads(allFunctions, profile.Projects["Core"], task.Task.OverloaderExclusions))
+                    foreach (var overload in Overloader.GetOverloads(allFunctions, profile.Projects["Core"], task.Task.OverloaderExclusions, true))
                     {
                         var sw2u = overload.Signature.Kind == SignatureKind.PotentiallyConflictingOverload
                             ? swOverloads ??= CreateOverloadsFile(folder, @class.ClassName, false)
@@ -204,7 +208,7 @@ namespace Silk.NET.BuildTools.Bind
                             }
                         }
 
-                        foreach (var attr in overload.Signature.Attributes)
+                        foreach (var attr in overload.Signature.GetAttributes())
                         {
                             sw2u.WriteLine($"        [{attr.Name}({string.Join(", ", attr.Arguments)})]");
                         }
@@ -241,9 +245,9 @@ namespace Silk.NET.BuildTools.Bind
                     FinishOverloadsFile(swOverloads);
                     sw.Flush();
                     sw.Dispose();
-                    if (!File.Exists(Path.Combine(folder, $"{@class.ClassName}.cs")) && allFunctions.Any())
+                    if (!File.Exists(Path.Combine(manualFolder, $"{@class.ClassName}.cs")) && allFunctions.Any())
                     {
-                        sw = new StreamWriter(Path.Combine(folder, $"{@class.ClassName}.cs")) {NewLine = "\n"};
+                        sw = new StreamWriter(Path.Combine(manualFolder, $"{@class.ClassName}.cs")) {NewLine = "\n"};
                         sw.WriteCoreUsings();
                         sw.WriteLine("using static Silk.NET.Core.Attributes.ExtensionAttribute;");
                         sw.WriteLine();
@@ -260,7 +264,7 @@ namespace Silk.NET.BuildTools.Bind
                             sw.WriteLine
                             (
                                 $"             return new(CreateDefaultContext" +
-                                $"(new {task.Task.NameContainer.ClassName}().GetLibraryName()));"
+                                $"(new {task.Task.NameContainer.ClassName}().GetLibraryNames()));"
                             );
                         }
                         else
@@ -272,10 +276,7 @@ namespace Silk.NET.BuildTools.Bind
                         sw.WriteLine("        public bool TryGetExtension<T>(out T ext)");
                         sw.WriteLine($"            where T:NativeExtension<{@class.ClassName}>");
                         sw.WriteLine("        {");
-                        sw.WriteLine("             ext = IsExtensionPresent(GetExtensionAttribute(typeof(T)).Name)");
-                        sw.WriteLine("                 ? (T) Activator.CreateInstance(typeof(T), Context)");
-                        sw.WriteLine("                 : null;");
-                        sw.WriteLine("             return ext is not null;");
+                        sw.WriteLine("             throw new NotImplementedException();");
                         sw.WriteLine("        }");
                         sw.WriteLine();
                         sw.WriteLine("        public override bool IsExtensionPresent(string extension)");
@@ -292,7 +293,7 @@ namespace Silk.NET.BuildTools.Bind
                     if (!(task.Task.NameContainer is null))
                     {
                         project.WriteNameContainer
-                            (profile, Path.Combine(folder, $"{task.Task.NameContainer.ClassName}.cs"), task);
+                            (profile, Path.Combine(manualFolder, $"{task.Task.NameContainer.ClassName}.cs"), task);
                     }
                 }
                 else
@@ -326,6 +327,14 @@ namespace Silk.NET.BuildTools.Bind
                         sw.WriteLine($"        public const string ExtensionName = \"{key}\";");
                         foreach (var function in i.Functions)
                         {
+                            var coreProject = profile.Projects["Core"];
+
+                            if (!task.Task.Controls.Contains("allow-redefinitions") && coreProject.Classes.Any(x => x.NativeApis.Any(x => x.Value.Functions.Any(x => x.NativeName == function.NativeName 
+                                && x.Parameters.Select(x => x.Type.OriginalName).SequenceEqual(function.Parameters.Select(x => x.Type.OriginalName))))))
+                            {
+                                continue;
+                            }
+                            
                             AddInjectionAttributes(function, task);
 
                             if (!string.IsNullOrWhiteSpace(function.PreprocessorConditions))
@@ -342,7 +351,7 @@ namespace Silk.NET.BuildTools.Bind
                                 }
                             }
 
-                            foreach (var attr in function.Attributes)
+                            foreach (var attr in function.GetAttributes())
                             {
                                 sw.WriteLine($"        [{attr.Name}({string.Join(", ", attr.Arguments)})]");
                             }
@@ -377,8 +386,16 @@ namespace Silk.NET.BuildTools.Bind
                             sw.WriteLine();
                         }
 
-                        foreach (var overload in Overloader.GetOverloads(i.Functions, profile.Projects["Core"], task.Task.OverloaderExclusions))
+                        var overloads = Overloader.GetOverloads(i.Functions, profile.Projects["Core"], task.Task.OverloaderExclusions);
+                        foreach (var overload in overloads)
                         {
+                            var coreProject = profile.Projects["Core"];
+
+                            if (!task.Task.Controls.Contains("allow-redefinitions") && coreProject.Classes.Any(x => x.NativeApis.Any(x => x.Value.Functions.Any(x => x.NativeName == overload.Signature.NativeName))))
+                            {
+                                continue;
+                            }
+
                             var sw2u = overload.Signature.Kind == SignatureKind.PotentiallyConflictingOverload
                                 ? swOverloads ??= CreateOverloadsFile(folder, name, true)
                                 : sw;
@@ -409,7 +426,7 @@ namespace Silk.NET.BuildTools.Bind
                                 }
                             }
 
-                            foreach (var attr in overload.Signature.Attributes)
+                            foreach (var attr in overload.Signature.GetAttributes())
                             {
                                 sw2u.WriteLine($"        [{attr.Name}({string.Join(", ", attr.Arguments)})]");
                             }
@@ -443,6 +460,7 @@ namespace Silk.NET.BuildTools.Bind
                         sw.WriteLine("}");
                         sw.WriteLine();
                         sw.Flush();
+                        sw.Dispose();
                         FinishOverloadsFile(swOverloads);
                     }
                 }

@@ -20,9 +20,13 @@ namespace Silk.NET.OpenCL
         KernelBatchingArm = 0x41E7,
         [NativeName("Name", "CL_QUEUE_DEFERRED_FLUSH_ARM")]
         DeferredFlushArm = 0x41EC,
+        [NativeName("Name", "CL_QUEUE_COMPUTE_UNIT_LIMIT_ARM")]
+        ComputeUnitLimitArm = 0x41F3,
         [NativeName("Name", "CL_QUEUE_FAMILY_INTEL")]
         FamilyIntel = 0x418C,
         [NativeName("Name", "CL_QUEUE_INDEX_INTEL")]
         IndexIntel = 0x418D,
+        [NativeName("Name", "CL_QUEUE_JOB_SLOT_ARM")]
+        JobSlotArm = 0x41E1,
     }
 }

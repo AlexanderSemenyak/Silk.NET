@@ -51,21 +51,15 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"ShadingRateImageBitNV\"")]
         [NativeName("Name", "VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV")]
         ImageUsageShadingRateImageBitNV = 256,
-        [Obsolete("Deprecated in favour of \"Reserved16BitQCom\"")]
-        [NativeName("Name", "VK_IMAGE_USAGE_RESERVED_16_BIT_QCOM")]
-        ImageUsageReserved16BitQCom = 65536,
-        [Obsolete("Deprecated in favour of \"Reserved17BitQCom\"")]
-        [NativeName("Name", "VK_IMAGE_USAGE_RESERVED_17_BIT_QCOM")]
-        ImageUsageReserved17BitQCom = 131072,
         [Obsolete("Deprecated in favour of \"FragmentDensityMapBitExt\"")]
         [NativeName("Name", "VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT")]
         ImageUsageFragmentDensityMapBitExt = 512,
         [Obsolete("Deprecated in favour of \"FragmentShadingRateAttachmentBitKhr\"")]
         [NativeName("Name", "VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
         ImageUsageFragmentShadingRateAttachmentBitKhr = 256,
-        [Obsolete("Deprecated in favour of \"Reserved22BitExt\"")]
-        [NativeName("Name", "VK_IMAGE_USAGE_RESERVED_22_BIT_EXT")]
-        ImageUsageReserved22BitExt = 4194304,
+        [Obsolete("Deprecated in favour of \"HostTransferBitExt\"")]
+        [NativeName("Name", "VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT")]
+        ImageUsageHostTransferBitExt = 4194304,
         [Obsolete("Deprecated in favour of \"VideoEncodeDstBitKhr\"")]
         [NativeName("Name", "VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR")]
         ImageUsageVideoEncodeDstBitKhr = 8192,
@@ -75,9 +69,9 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"VideoEncodeDpbBitKhr\"")]
         [NativeName("Name", "VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR")]
         ImageUsageVideoEncodeDpbBitKhr = 32768,
-        [Obsolete("Deprecated in favour of \"Reserved19BitExt\"")]
-        [NativeName("Name", "VK_IMAGE_USAGE_RESERVED_19_BIT_EXT")]
-        ImageUsageReserved19BitExt = 524288,
+        [Obsolete("Deprecated in favour of \"AttachmentFeedbackLoopBitExt\"")]
+        [NativeName("Name", "VK_IMAGE_USAGE_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT")]
+        ImageUsageAttachmentFeedbackLoopBitExt = 524288,
         [Obsolete("Deprecated in favour of \"InvocationMaskBitHuawei\"")]
         [NativeName("Name", "VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI")]
         ImageUsageInvocationMaskBitHuawei = 262144,
@@ -111,24 +105,20 @@ namespace Silk.NET.Vulkan
         VideoDecodeDpbBitKhr = 4096,
         [NativeName("Name", "VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV")]
         ShadingRateImageBitNV = 256,
-        [NativeName("Name", "VK_IMAGE_USAGE_RESERVED_16_BIT_QCOM")]
-        Reserved16BitQCom = 65536,
-        [NativeName("Name", "VK_IMAGE_USAGE_RESERVED_17_BIT_QCOM")]
-        Reserved17BitQCom = 131072,
         [NativeName("Name", "VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT")]
         FragmentDensityMapBitExt = 512,
         [NativeName("Name", "VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
         FragmentShadingRateAttachmentBitKhr = 256,
-        [NativeName("Name", "VK_IMAGE_USAGE_RESERVED_22_BIT_EXT")]
-        Reserved22BitExt = 4194304,
+        [NativeName("Name", "VK_IMAGE_USAGE_HOST_TRANSFER_BIT_EXT")]
+        HostTransferBitExt = 4194304,
         [NativeName("Name", "VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR")]
         VideoEncodeDstBitKhr = 8192,
         [NativeName("Name", "VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR")]
         VideoEncodeSrcBitKhr = 16384,
         [NativeName("Name", "VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR")]
         VideoEncodeDpbBitKhr = 32768,
-        [NativeName("Name", "VK_IMAGE_USAGE_RESERVED_19_BIT_EXT")]
-        Reserved19BitExt = 524288,
+        [NativeName("Name", "VK_IMAGE_USAGE_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT")]
+        AttachmentFeedbackLoopBitExt = 524288,
         [NativeName("Name", "VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI")]
         InvocationMaskBitHuawei = 262144,
         [NativeName("Name", "VK_IMAGE_USAGE_SAMPLE_WEIGHT_BIT_QCOM")]

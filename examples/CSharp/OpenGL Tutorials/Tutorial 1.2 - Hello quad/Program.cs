@@ -66,9 +66,12 @@ namespace Tutorial
             window.Load += OnLoad;
             window.Render += OnRender;
             window.Update += OnUpdate;
+            window.FramebufferResize += OnFramebufferResize;
             window.Closing += OnClose;
 
             window.Run();
+
+            window.Dispose();
         }
 
 
@@ -167,6 +170,11 @@ namespace Tutorial
         private static void OnUpdate(double obj)
         {
 
+        }
+
+        private static void OnFramebufferResize(Vector2D<int> newSize)
+        {
+            Gl.Viewport(newSize);
         }
 
         private static void OnClose()

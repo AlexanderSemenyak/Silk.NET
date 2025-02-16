@@ -9,12 +9,9 @@ using Silk.NET.Core.Attributes;
 
 namespace Silk.NET.Assimp
 {
-    [Flags]
     [NativeName("Name", "aiMetadataType")]
     public enum MetadataType : int
     {
-        [NativeName("Name", "")]
-        None = 0,
         [NativeName("Name", "AI_BOOL")]
         Bool = 0x0,
         [NativeName("Name", "AI_INT32")]
@@ -31,7 +28,11 @@ namespace Silk.NET.Assimp
         Aivector3D = 0x6,
         [NativeName("Name", "AI_AIMETADATA")]
         Aimetadata = 0x7,
+        [NativeName("Name", "AI_INT64")]
+        Int64 = 0x8,
+        [NativeName("Name", "AI_UINT32")]
+        Uint32 = 0x9,
         [NativeName("Name", "AI_META_MAX")]
-        MetaMax = 0x8,
+        MetaMax = 0xA,
     }
 }

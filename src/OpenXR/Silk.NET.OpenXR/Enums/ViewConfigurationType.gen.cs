@@ -9,9 +9,12 @@ using Silk.NET.Core.Attributes;
 
 namespace Silk.NET.OpenXR
 {
+    [Flags]
     [NativeName("Name", "XrViewConfigurationType")]
     public enum ViewConfigurationType : int
     {
+        [NativeName("Name", "")]
+        None = 0,
         [NativeName("Name", "XR_VIEW_CONFIGURATION_TYPE_PRIMARY_MONO")]
         PrimaryMono = 1,
         [NativeName("Name", "XR_VIEW_CONFIGURATION_TYPE_PRIMARY_STEREO")]
@@ -20,5 +23,7 @@ namespace Silk.NET.OpenXR
         PrimaryQuadVarjo = 1000037000,
         [NativeName("Name", "XR_VIEW_CONFIGURATION_TYPE_SECONDARY_MONO_FIRST_PERSON_OBSERVER_MSFT")]
         SecondaryMonoFirstPersonObserverMsft = 1000054000,
+        [NativeName("Name", "XR_VIEW_CONFIGURATION_TYPE_PRIMARY_STEREO_WITH_FOVEATED_INSET")]
+        PrimaryStereoWithFoveatedInset = 1000037000,
     }
 }

@@ -9,12 +9,9 @@ using Silk.NET.Core.Attributes;
 
 namespace Silk.NET.Direct3D12
 {
-    [Flags]
     [NativeName("Name", "D3D12_COMMAND_LIST_TYPE")]
     public enum CommandListType : int
     {
-        [NativeName("Name", "")]
-        None = 0,
         [Obsolete("Deprecated in favour of \"Direct\"")]
         [NativeName("Name", "D3D12_COMMAND_LIST_TYPE_DIRECT")]
         CommandListTypeDirect = 0x0,
@@ -36,6 +33,9 @@ namespace Silk.NET.Direct3D12
         [Obsolete("Deprecated in favour of \"VideoEncode\"")]
         [NativeName("Name", "D3D12_COMMAND_LIST_TYPE_VIDEO_ENCODE")]
         CommandListTypeVideoEncode = 0x6,
+        [Obsolete("Deprecated in favour of \"None\"")]
+        [NativeName("Name", "D3D12_COMMAND_LIST_TYPE_NONE")]
+        CommandListTypeNone = unchecked((int) 0xFFFFFFFFFFFFFFFF),
         [NativeName("Name", "D3D12_COMMAND_LIST_TYPE_DIRECT")]
         Direct = 0x0,
         [NativeName("Name", "D3D12_COMMAND_LIST_TYPE_BUNDLE")]
@@ -50,5 +50,7 @@ namespace Silk.NET.Direct3D12
         VideoProcess = 0x5,
         [NativeName("Name", "D3D12_COMMAND_LIST_TYPE_VIDEO_ENCODE")]
         VideoEncode = 0x6,
+        [NativeName("Name", "D3D12_COMMAND_LIST_TYPE_NONE")]
+        None = unchecked((int) 0xFFFFFFFFFFFFFFFF),
     }
 }

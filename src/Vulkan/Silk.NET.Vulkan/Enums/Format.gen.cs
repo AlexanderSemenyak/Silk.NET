@@ -494,66 +494,6 @@ namespace Silk.NET.Vulkan
         G16B16R162Plane422UnormKhr = 1000156032,
         [NativeName("Name", "VK_FORMAT_G16_B16_R16_3PLANE_444_UNORM_KHR")]
         G16B16R163Plane444UnormKhr = 1000156033,
-        [NativeName("Name", "VK_FORMAT_ASTC_3x3x3_UNORM_BLOCK_EXT")]
-        Astc3x3x3UnormBlockExt = 1000288000,
-        [NativeName("Name", "VK_FORMAT_ASTC_3x3x3_SRGB_BLOCK_EXT")]
-        Astc3x3x3SrgbBlockExt = 1000288001,
-        [NativeName("Name", "VK_FORMAT_ASTC_3x3x3_SFLOAT_BLOCK_EXT")]
-        Astc3x3x3SfloatBlockExt = 1000288002,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x3x3_UNORM_BLOCK_EXT")]
-        Astc4x3x3UnormBlockExt = 1000288003,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x3x3_SRGB_BLOCK_EXT")]
-        Astc4x3x3SrgbBlockExt = 1000288004,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x3x3_SFLOAT_BLOCK_EXT")]
-        Astc4x3x3SfloatBlockExt = 1000288005,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x4x3_UNORM_BLOCK_EXT")]
-        Astc4x4x3UnormBlockExt = 1000288006,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x4x3_SRGB_BLOCK_EXT")]
-        Astc4x4x3SrgbBlockExt = 1000288007,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x4x3_SFLOAT_BLOCK_EXT")]
-        Astc4x4x3SfloatBlockExt = 1000288008,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x4x4_UNORM_BLOCK_EXT")]
-        Astc4x4x4UnormBlockExt = 1000288009,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x4x4_SRGB_BLOCK_EXT")]
-        Astc4x4x4SrgbBlockExt = 1000288010,
-        [NativeName("Name", "VK_FORMAT_ASTC_4x4x4_SFLOAT_BLOCK_EXT")]
-        Astc4x4x4SfloatBlockExt = 1000288011,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x4x4_UNORM_BLOCK_EXT")]
-        Astc5x4x4UnormBlockExt = 1000288012,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x4x4_SRGB_BLOCK_EXT")]
-        Astc5x4x4SrgbBlockExt = 1000288013,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x4x4_SFLOAT_BLOCK_EXT")]
-        Astc5x4x4SfloatBlockExt = 1000288014,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x5x4_UNORM_BLOCK_EXT")]
-        Astc5x5x4UnormBlockExt = 1000288015,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x5x4_SRGB_BLOCK_EXT")]
-        Astc5x5x4SrgbBlockExt = 1000288016,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x5x4_SFLOAT_BLOCK_EXT")]
-        Astc5x5x4SfloatBlockExt = 1000288017,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x5x5_UNORM_BLOCK_EXT")]
-        Astc5x5x5UnormBlockExt = 1000288018,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x5x5_SRGB_BLOCK_EXT")]
-        Astc5x5x5SrgbBlockExt = 1000288019,
-        [NativeName("Name", "VK_FORMAT_ASTC_5x5x5_SFLOAT_BLOCK_EXT")]
-        Astc5x5x5SfloatBlockExt = 1000288020,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x5x5_UNORM_BLOCK_EXT")]
-        Astc6x5x5UnormBlockExt = 1000288021,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x5x5_SRGB_BLOCK_EXT")]
-        Astc6x5x5SrgbBlockExt = 1000288022,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x5x5_SFLOAT_BLOCK_EXT")]
-        Astc6x5x5SfloatBlockExt = 1000288023,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x6x5_UNORM_BLOCK_EXT")]
-        Astc6x6x5UnormBlockExt = 1000288024,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x6x5_SRGB_BLOCK_EXT")]
-        Astc6x6x5SrgbBlockExt = 1000288025,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x6x5_SFLOAT_BLOCK_EXT")]
-        Astc6x6x5SfloatBlockExt = 1000288026,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x6x6_UNORM_BLOCK_EXT")]
-        Astc6x6x6UnormBlockExt = 1000288027,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x6x6_SRGB_BLOCK_EXT")]
-        Astc6x6x6SrgbBlockExt = 1000288028,
-        [NativeName("Name", "VK_FORMAT_ASTC_6x6x6_SFLOAT_BLOCK_EXT")]
-        Astc6x6x6SfloatBlockExt = 1000288029,
         [NativeName("Name", "VK_FORMAT_G8_B8R8_2PLANE_444_UNORM_EXT")]
         G8B8R82Plane444UnormExt = 1000330000,
         [NativeName("Name", "VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT")]
@@ -566,6 +506,14 @@ namespace Silk.NET.Vulkan
         A4R4G4B4UnormPack16Ext = 1000340000,
         [NativeName("Name", "VK_FORMAT_A4B4G4R4_UNORM_PACK16_EXT")]
         A4B4G4R4UnormPack16Ext = 1000340001,
+        [NativeName("Name", "VK_FORMAT_R16G16_SFIXED5_NV")]
+        R16G16Sfixed5NV = 1000464000,
+        [NativeName("Name", "VK_FORMAT_R16G16_S10_5_NV")]
+        R16G16S105NV = 1000464000,
+        [NativeName("Name", "VK_FORMAT_A1B5G5R5_UNORM_PACK16_KHR")]
+        A1B5G5R5UnormPack16Khr = 1000470000,
+        [NativeName("Name", "VK_FORMAT_A8_UNORM_KHR")]
+        A8UnormKhr = 1000470001,
         [NativeName("Name", "VK_FORMAT_G8B8G8R8_422_UNORM")]
         G8B8G8R8422Unorm = 1000156000,
         [NativeName("Name", "VK_FORMAT_B8G8R8G8_422_UNORM")]

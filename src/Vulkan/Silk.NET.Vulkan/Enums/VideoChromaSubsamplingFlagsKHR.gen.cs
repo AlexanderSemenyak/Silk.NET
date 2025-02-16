@@ -13,11 +13,9 @@ namespace Silk.NET.Vulkan
     [NativeName("Name", "VkVideoChromaSubsamplingFlagsKHR")]
     public enum VideoChromaSubsamplingFlagsKHR : int
     {
-        [NativeName("Name", "")]
-        None = 0,
-        [Obsolete("Deprecated in favour of \"SubsamplingInvalidBitKhr\"")]
-        [NativeName("Name", "VK_VIDEO_CHROMA_SUBSAMPLING_INVALID_BIT_KHR")]
-        VideoChromaSubsamplingInvalidBitKhr = 0,
+        [Obsolete("Deprecated in favour of \"SubsamplingInvalidKhr\"")]
+        [NativeName("Name", "VK_VIDEO_CHROMA_SUBSAMPLING_INVALID_KHR")]
+        VideoChromaSubsamplingInvalidKhr = 0,
         [Obsolete("Deprecated in favour of \"SubsamplingMonochromeBitKhr\"")]
         [NativeName("Name", "VK_VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR")]
         VideoChromaSubsamplingMonochromeBitKhr = 1,
@@ -30,8 +28,8 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"Subsampling444BitKhr\"")]
         [NativeName("Name", "VK_VIDEO_CHROMA_SUBSAMPLING_444_BIT_KHR")]
         VideoChromaSubsampling444BitKhr = 8,
-        [NativeName("Name", "VK_VIDEO_CHROMA_SUBSAMPLING_INVALID_BIT_KHR")]
-        SubsamplingInvalidBitKhr = 0,
+        [NativeName("Name", "VK_VIDEO_CHROMA_SUBSAMPLING_INVALID_KHR")]
+        SubsamplingInvalidKhr = 0,
         [NativeName("Name", "VK_VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR")]
         SubsamplingMonochromeBitKhr = 1,
         [NativeName("Name", "VK_VIDEO_CHROMA_SUBSAMPLING_420_BIT_KHR")]

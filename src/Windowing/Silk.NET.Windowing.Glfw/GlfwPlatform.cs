@@ -23,9 +23,10 @@ namespace Silk.NET.Windowing.Glfw
         (
             () =>
             {
+                GLFW.Glfw? api = null;
                 try
                 {
-                    GLFW.Glfw.GetApi(); // activate the class so we can determine if we can activate the class
+                    api = GLFW.Glfw.GetApi(); // activate the class so we can determine if we can activate the class
                 }
                 catch (Exception ex)
                 {
@@ -34,10 +35,16 @@ namespace Silk.NET.Windowing.Glfw
 #endif
                     return false;
                 }
+                finally
+                {
+                    api?.Dispose();
+                }
 
                 return true;
             }
         );
+
+        string Name => nameof(GlfwPlatform);
         
         /// <inheritdoc />
         public bool IsViewOnly { get; } = false;

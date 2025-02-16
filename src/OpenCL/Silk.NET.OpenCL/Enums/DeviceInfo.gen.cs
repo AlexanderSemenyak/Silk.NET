@@ -364,6 +364,8 @@ namespace Silk.NET.OpenCL
         SchedulingControlsCapabilitiesArm = 0x41E4,
         [NativeName("Name", "CL_DEVICE_SUPPORTED_REGISTER_ALLOCATIONS_ARM")]
         SupportedRegisterAllocationsArm = 0x41EB,
+        [NativeName("Name", "CL_DEVICE_MAX_WARP_COUNT_ARM")]
+        MaxWarpCountArm = 0x41EA,
         [NativeName("Name", "CL_DEVICE_CXX_FOR_OPENCL_NUMERIC_VERSION_EXT")]
         CxxForOpenclNumericVersionExt = 0x4230,
         [NativeName("Name", "CL_DEVICE_NUMERIC_VERSION_KHR")]
@@ -376,6 +378,8 @@ namespace Silk.NET.OpenCL
         IlsWithVersionKhr = 0x1061,
         [NativeName("Name", "CL_DEVICE_BUILT_IN_KERNELS_WITH_VERSION_KHR")]
         BuiltInKernelsWithVersionKhr = 0x1062,
+        [NativeName("Name", "CL_DEVICE_MEMORY_CAPABILITIES_IMG")]
+        MemoryCapabilitiesImg = 0x40D8,
         [NativeName("Name", "CL_DEVICE_CONTROLLED_TERMINATION_CAPABILITIES_ARM")]
         ControlledTerminationCapabilitiesArm = 0x41EE,
         [NativeName("Name", "CL_DEVICE_QUEUE_FAMILY_PROPERTIES_INTEL")]
@@ -410,6 +414,8 @@ namespace Silk.NET.OpenCL
         SemaphoreExportHandleTypesKhr = 0x204E,
         [NativeName("Name", "CL_DEVICE_EXTERNAL_MEMORY_IMPORT_HANDLE_TYPES_KHR")]
         ExternalMemoryImportHandleTypesKhr = 0x204F,
+        [NativeName("Name", "CL_DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_IMAGES_HANDLE_TYPES_KHR")]
+        ExternalMemoryImportAssumeLinearImagesHandleTypesKhr = 0x2052,
         [NativeName("Name", "CL_DEVICE_COMMAND_BUFFER_CAPABILITIES_KHR")]
         CommandBufferCapabilitiesKhr = 0x12A9,
         [NativeName("Name", "CL_DEVICE_COMMAND_BUFFER_REQUIRED_QUEUE_PROPERTIES_KHR")]
@@ -420,5 +426,15 @@ namespace Silk.NET.OpenCL
         DoubleFPAtomicCapabilitiesExt = 0x4232,
         [NativeName("Name", "CL_DEVICE_HALF_FP_ATOMIC_CAPABILITIES_EXT")]
         HalfFPAtomicCapabilitiesExt = 0x4233,
+        [NativeName("Name", "CL_DEVICE_JOB_SLOTS_ARM")]
+        JobSlotsArm = 0x41E0,
+        [NativeName("Name", "CL_DEVICE_MUTABLE_DISPATCH_CAPABILITIES_KHR")]
+        MutableDispatchCapabilitiesKhr = 0x12B0,
+        [NativeName("Name", "CL_DEVICE_COMMAND_BUFFER_NUM_SYNC_DEVICES_KHR")]
+        CommandBufferNumSyncDevicesKhr = 0x12AB,
+        [NativeName("Name", "CL_DEVICE_COMMAND_BUFFER_SYNC_DEVICES_KHR")]
+        CommandBufferSyncDevicesKhr = 0x12AC,
+        [NativeName("Name", "CL_DEVICE_KERNEL_CLOCK_CAPABILITIES_KHR")]
+        KernelClockCapabilitiesKhr = 0x1076,
     }
 }

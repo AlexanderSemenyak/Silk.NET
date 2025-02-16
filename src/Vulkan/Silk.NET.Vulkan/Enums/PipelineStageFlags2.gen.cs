@@ -184,6 +184,9 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"CommandPreprocessBitNV\"")]
         [NativeName("Name", "VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV")]
         PipelineStage2CommandPreprocessBitNV = 131072,
+        [Obsolete("Deprecated in favour of \"CommandPreprocessBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_EXT")]
+        PipelineStage2CommandPreprocessBitExt = 131072,
         [Obsolete("Deprecated in favour of \"FragmentShadingRateAttachmentBitKhr\"")]
         [NativeName("Name", "VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
         PipelineStage2FragmentShadingRateAttachmentBitKhr = 4194304,
@@ -211,6 +214,15 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"MeshShaderBitNV\"")]
         [NativeName("Name", "VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV")]
         PipelineStage2MeshShaderBitNV = 1048576,
+        [Obsolete("Deprecated in favour of \"TaskShaderBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT")]
+        PipelineStage2TaskShaderBitExt = 524288,
+        [Obsolete("Deprecated in favour of \"MeshShaderBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT")]
+        PipelineStage2MeshShaderBitExt = 1048576,
+        [Obsolete("Deprecated in favour of \"SubpassShaderBitHuawei\"")]
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI")]
+        PipelineStage2SubpassShaderBitHuawei = 549755813888,
         [Obsolete("Deprecated in favour of \"SubpassShadingBitHuawei\"")]
         [NativeName("Name", "VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI")]
         PipelineStage2SubpassShadingBitHuawei = 549755813888,
@@ -220,12 +232,15 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"AccelerationStructureCopyBitKhr\"")]
         [NativeName("Name", "VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR")]
         PipelineStage2AccelerationStructureCopyBitKhr = 268435456,
-        [Obsolete("Deprecated in favour of \"Reserved30BitNV\"")]
-        [NativeName("Name", "VK_PIPELINE_STAGE_2_RESERVED_30_BIT_NV")]
-        PipelineStage2Reserved30BitNV = 1073741824,
-        [Obsolete("Deprecated in favour of \"Reserved29BitNV\"")]
-        [NativeName("Name", "VK_PIPELINE_STAGE_2_RESERVED_29_BIT_NV")]
-        PipelineStage2Reserved29BitNV = 536870912,
+        [Obsolete("Deprecated in favour of \"MicromapBuildBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT")]
+        PipelineStage2MicromapBuildBitExt = 1073741824,
+        [Obsolete("Deprecated in favour of \"ClusterCullingShaderBitHuawei\"")]
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_CLUSTER_CULLING_SHADER_BIT_HUAWEI")]
+        PipelineStage2ClusterCullingShaderBitHuawei = 2199023255552,
+        [Obsolete("Deprecated in favour of \"OpticalFlowBitNV\"")]
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV")]
+        PipelineStage2OpticalFlowBitNV = 536870912,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_NONE")]
         None = 0,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_NONE_KHR")]
@@ -340,6 +355,8 @@ namespace Silk.NET.Vulkan
         ConditionalRenderingBitExt = 262144,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV")]
         CommandPreprocessBitNV = 131072,
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_EXT")]
+        CommandPreprocessBitExt = 131072,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
         FragmentShadingRateAttachmentBitKhr = 4194304,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV")]
@@ -358,15 +375,23 @@ namespace Silk.NET.Vulkan
         TaskShaderBitNV = 524288,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV")]
         MeshShaderBitNV = 1048576,
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT")]
+        TaskShaderBitExt = 524288,
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT")]
+        MeshShaderBitExt = 1048576,
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI")]
+        SubpassShaderBitHuawei = 549755813888,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI")]
         SubpassShadingBitHuawei = 549755813888,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI")]
         InvocationMaskBitHuawei = 1099511627776,
         [NativeName("Name", "VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR")]
         AccelerationStructureCopyBitKhr = 268435456,
-        [NativeName("Name", "VK_PIPELINE_STAGE_2_RESERVED_30_BIT_NV")]
-        Reserved30BitNV = 1073741824,
-        [NativeName("Name", "VK_PIPELINE_STAGE_2_RESERVED_29_BIT_NV")]
-        Reserved29BitNV = 536870912,
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT")]
+        MicromapBuildBitExt = 1073741824,
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_CLUSTER_CULLING_SHADER_BIT_HUAWEI")]
+        ClusterCullingShaderBitHuawei = 2199023255552,
+        [NativeName("Name", "VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV")]
+        OpticalFlowBitNV = 536870912,
     }
 }

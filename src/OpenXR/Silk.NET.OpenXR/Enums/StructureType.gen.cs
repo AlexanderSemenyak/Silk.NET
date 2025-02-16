@@ -249,6 +249,15 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"GraphicsRequirementsD3D12Khr\"")]
         [NativeName("Name", "XR_TYPE_GRAPHICS_REQUIREMENTS_D3D12_KHR")]
         TypeGraphicsRequirementsD3D12Khr = 1000028002,
+        [Obsolete("Deprecated in favour of \"GraphicsBindingMetalKhr\"")]
+        [NativeName("Name", "XR_TYPE_GRAPHICS_BINDING_METAL_KHR")]
+        TypeGraphicsBindingMetalKhr = 1000029000,
+        [Obsolete("Deprecated in favour of \"SwapchainImageMetalKhr\"")]
+        [NativeName("Name", "XR_TYPE_SWAPCHAIN_IMAGE_METAL_KHR")]
+        TypeSwapchainImageMetalKhr = 1000029001,
+        [Obsolete("Deprecated in favour of \"GraphicsRequirementsMetalKhr\"")]
+        [NativeName("Name", "XR_TYPE_GRAPHICS_REQUIREMENTS_METAL_KHR")]
+        TypeGraphicsRequirementsMetalKhr = 1000029002,
         [Obsolete("Deprecated in favour of \"SystemEyeGazeInteractionPropertiesExt\"")]
         [NativeName("Name", "XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT")]
         TypeSystemEyeGazeInteractionPropertiesExt = 1000030000,
@@ -381,6 +390,21 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"CompositionLayerSecureContentFB\"")]
         [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB")]
         TypeCompositionLayerSecureContentFB = 1000072000,
+        [Obsolete("Deprecated in favour of \"BodyTrackerCreateInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_BODY_TRACKER_CREATE_INFO_FB")]
+        TypeBodyTrackerCreateInfoFB = 1000076001,
+        [Obsolete("Deprecated in favour of \"BodyJointsLocateInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_BODY_JOINTS_LOCATE_INFO_FB")]
+        TypeBodyJointsLocateInfoFB = 1000076002,
+        [Obsolete("Deprecated in favour of \"SystemBodyTrackingPropertiesFB\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB")]
+        TypeSystemBodyTrackingPropertiesFB = 1000076004,
+        [Obsolete("Deprecated in favour of \"BodyJointLocationsFB\"")]
+        [NativeName("Name", "XR_TYPE_BODY_JOINT_LOCATIONS_FB")]
+        TypeBodyJointLocationsFB = 1000076005,
+        [Obsolete("Deprecated in favour of \"BodySkeletonFB\"")]
+        [NativeName("Name", "XR_TYPE_BODY_SKELETON_FB")]
+        TypeBodySkeletonFB = 1000076006,
         [Obsolete("Deprecated in favour of \"InteractionProfileDpadBindingExt\"")]
         [NativeName("Name", "XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT")]
         TypeInteractionProfileDpadBindingExt = 1000078000,
@@ -570,6 +594,9 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"GeometryInstanceTransformFB\"")]
         [NativeName("Name", "XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB")]
         TypeGeometryInstanceTransformFB = 1000118005,
+        [Obsolete("Deprecated in favour of \"SystemPassthroughProperties2FB\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB")]
+        TypeSystemPassthroughProperties2FB = 1000118006,
         [Obsolete("Deprecated in favour of \"PassthroughStyleFB\"")]
         [NativeName("Name", "XR_TYPE_PASSTHROUGH_STYLE_FB")]
         TypePassthroughStyleFB = 1000118020,
@@ -627,12 +654,129 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"MarkerSpaceCreateInfoVarjo\"")]
         [NativeName("Name", "XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO")]
         TypeMarkerSpaceCreateInfoVarjo = 1000124002,
+        [Obsolete("Deprecated in favour of \"FrameEndInfoML\"")]
+        [NativeName("Name", "XR_TYPE_FRAME_END_INFO_ML")]
+        TypeFrameEndInfoML = 1000135000,
+        [Obsolete("Deprecated in favour of \"GlobalDimmerFrameEndInfoML\"")]
+        [NativeName("Name", "XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML")]
+        TypeGlobalDimmerFrameEndInfoML = 1000136000,
+        [Obsolete("Deprecated in favour of \"CoordinateSpaceCreateInfoML\"")]
+        [NativeName("Name", "XR_TYPE_COORDINATE_SPACE_CREATE_INFO_ML")]
+        TypeCoordinateSpaceCreateInfoML = 1000137000,
+        [Obsolete("Deprecated in favour of \"SystemMarkerUnderstandingPropertiesML\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML")]
+        TypeSystemMarkerUnderstandingPropertiesML = 1000138000,
+        [Obsolete("Deprecated in favour of \"MarkerDetectorCreateInfoML\"")]
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML")]
+        TypeMarkerDetectorCreateInfoML = 1000138001,
+        [Obsolete("Deprecated in favour of \"MarkerDetectorArucoInfoML\"")]
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML")]
+        TypeMarkerDetectorArucoInfoML = 1000138002,
+        [Obsolete("Deprecated in favour of \"MarkerDetectorSizeInfoML\"")]
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML")]
+        TypeMarkerDetectorSizeInfoML = 1000138003,
+        [Obsolete("Deprecated in favour of \"MarkerDetectorAprilTagInfoML\"")]
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML")]
+        TypeMarkerDetectorAprilTagInfoML = 1000138004,
+        [Obsolete("Deprecated in favour of \"MarkerDetectorCustomProfileInfoML\"")]
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML")]
+        TypeMarkerDetectorCustomProfileInfoML = 1000138005,
+        [Obsolete("Deprecated in favour of \"MarkerDetectorSnapshotInfoML\"")]
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML")]
+        TypeMarkerDetectorSnapshotInfoML = 1000138006,
+        [Obsolete("Deprecated in favour of \"MarkerDetectorStateML\"")]
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_STATE_ML")]
+        TypeMarkerDetectorStateML = 1000138007,
+        [Obsolete("Deprecated in favour of \"MarkerSpaceCreateInfoML\"")]
+        [NativeName("Name", "XR_TYPE_MARKER_SPACE_CREATE_INFO_ML")]
+        TypeMarkerSpaceCreateInfoML = 1000138008,
+        [Obsolete("Deprecated in favour of \"LocalizationMapML\"")]
+        [NativeName("Name", "XR_TYPE_LOCALIZATION_MAP_ML")]
+        TypeLocalizationMapML = 1000139000,
+        [Obsolete("Deprecated in favour of \"EventDataLocalizationChangedML\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML")]
+        TypeEventDataLocalizationChangedML = 1000139001,
+        [Obsolete("Deprecated in favour of \"MapLocalizationRequestInfoML\"")]
+        [NativeName("Name", "XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML")]
+        TypeMapLocalizationRequestInfoML = 1000139002,
+        [Obsolete("Deprecated in favour of \"LocalizationMapImportInfoML\"")]
+        [NativeName("Name", "XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML")]
+        TypeLocalizationMapImportInfoML = 1000139003,
+        [Obsolete("Deprecated in favour of \"LocalizationEnableEventsInfoML\"")]
+        [NativeName("Name", "XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML")]
+        TypeLocalizationEnableEventsInfoML = 1000139004,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsCreateInfoFromPoseML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML")]
+        TypeSpatialAnchorsCreateInfoFromPoseML = 1000140000,
+        [Obsolete("Deprecated in favour of \"CreateSpatialAnchorsCompletionML\"")]
+        [NativeName("Name", "XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML")]
+        TypeCreateSpatialAnchorsCompletionML = 1000140001,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorStateML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHOR_STATE_ML")]
+        TypeSpatialAnchorStateML = 1000140002,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsCreateStorageInfoML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML")]
+        TypeSpatialAnchorsCreateStorageInfoML = 1000141000,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsQueryInfoRadiusML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML")]
+        TypeSpatialAnchorsQueryInfoRadiusML = 1000141001,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsQueryCompletionML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML")]
+        TypeSpatialAnchorsQueryCompletionML = 1000141002,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsCreateInfoFromUuidsML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML")]
+        TypeSpatialAnchorsCreateInfoFromUuidsML = 1000141003,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsPublishInfoML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML")]
+        TypeSpatialAnchorsPublishInfoML = 1000141004,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsPublishCompletionML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML")]
+        TypeSpatialAnchorsPublishCompletionML = 1000141005,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsDeleteInfoML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML")]
+        TypeSpatialAnchorsDeleteInfoML = 1000141006,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsDeleteCompletionML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML")]
+        TypeSpatialAnchorsDeleteCompletionML = 1000141007,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsUpdateExpirationInfoML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML")]
+        TypeSpatialAnchorsUpdateExpirationInfoML = 1000141008,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsUpdateExpirationCompletionML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML")]
+        TypeSpatialAnchorsUpdateExpirationCompletionML = 1000141009,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsPublishCompletionDetailsML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML")]
+        TypeSpatialAnchorsPublishCompletionDetailsML = 1000141010,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsDeleteCompletionDetailsML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML")]
+        TypeSpatialAnchorsDeleteCompletionDetailsML = 1000141011,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorsUpdateExpirationCompletionDetailsML\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML")]
+        TypeSpatialAnchorsUpdateExpirationCompletionDetailsML = 1000141012,
+        [Obsolete("Deprecated in favour of \"EventDataHeadsetFitChangedML\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML")]
+        TypeEventDataHeadsetFitChangedML = 1000472000,
+        [Obsolete("Deprecated in favour of \"EventDataEyeCalibrationChangedML\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML")]
+        TypeEventDataEyeCalibrationChangedML = 1000472001,
+        [Obsolete("Deprecated in favour of \"UserCalibrationEnableEventsInfoML\"")]
+        [NativeName("Name", "XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML")]
+        TypeUserCalibrationEnableEventsInfoML = 1000472002,
         [Obsolete("Deprecated in favour of \"SpatialAnchorPersistenceInfoMsft\"")]
         [NativeName("Name", "XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT")]
         TypeSpatialAnchorPersistenceInfoMsft = 1000142000,
         [Obsolete("Deprecated in favour of \"SpatialAnchorFromPersistedAnchorCreateInfoMsft\"")]
         [NativeName("Name", "XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT")]
         TypeSpatialAnchorFromPersistedAnchorCreateInfoMsft = 1000142001,
+        [Obsolete("Deprecated in favour of \"SceneMarkersMsft\"")]
+        [NativeName("Name", "XR_TYPE_SCENE_MARKERS_MSFT")]
+        TypeSceneMarkersMsft = 1000147000,
+        [Obsolete("Deprecated in favour of \"SceneMarkerTypeFilterMsft\"")]
+        [NativeName("Name", "XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT")]
+        TypeSceneMarkerTypeFilterMsft = 1000147001,
+        [Obsolete("Deprecated in favour of \"SceneMarkerQRCodesMsft\"")]
+        [NativeName("Name", "XR_TYPE_SCENE_MARKER_QR_CODES_MSFT")]
+        TypeSceneMarkerQRCodesMsft = 1000147002,
         [Obsolete("Deprecated in favour of \"SpaceQueryInfoFB\"")]
         [NativeName("Name", "XR_TYPE_SPACE_QUERY_INFO_FB")]
         TypeSpaceQueryInfoFB = 1000156001,
@@ -678,12 +822,21 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"SwapchainStateSamplerVulkanFB\"")]
         [NativeName("Name", "XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB")]
         TypeSwapchainStateSamplerVulkanFB = 1000163000,
+        [Obsolete("Deprecated in favour of \"SpaceShareInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_SHARE_INFO_FB")]
+        TypeSpaceShareInfoFB = 1000169001,
+        [Obsolete("Deprecated in favour of \"EventDataSpaceShareCompleteFB\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB")]
+        TypeEventDataSpaceShareCompleteFB = 1000169002,
         [Obsolete("Deprecated in favour of \"CompositionLayerSpaceWarpInfoFB\"")]
         [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB")]
         TypeCompositionLayerSpaceWarpInfoFB = 1000171000,
         [Obsolete("Deprecated in favour of \"SystemSpaceWarpPropertiesFB\"")]
         [NativeName("Name", "XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB")]
         TypeSystemSpaceWarpPropertiesFB = 1000171001,
+        [Obsolete("Deprecated in favour of \"HapticAmplitudeEnvelopeVibrationFB\"")]
+        [NativeName("Name", "XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB")]
+        TypeHapticAmplitudeEnvelopeVibrationFB = 1000173001,
         [Obsolete("Deprecated in favour of \"SemanticLabelsFB\"")]
         [NativeName("Name", "XR_TYPE_SEMANTIC_LABELS_FB")]
         TypeSemanticLabelsFB = 1000175000,
@@ -693,18 +846,126 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"Boundary2DFB\"")]
         [NativeName("Name", "XR_TYPE_BOUNDARY_2D_FB")]
         TypeBoundary2DFB = 1000175002,
+        [Obsolete("Deprecated in favour of \"SemanticLabelsSupportInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB")]
+        TypeSemanticLabelsSupportInfoFB = 1000175010,
         [Obsolete("Deprecated in favour of \"DigitalLensControlAlmalence\"")]
         [NativeName("Name", "XR_TYPE_DIGITAL_LENS_CONTROL_ALMALENCE")]
         TypeDigitalLensControlAlmalence = 1000196000,
+        [Obsolete("Deprecated in favour of \"EventDataSceneCaptureCompleteFB\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB")]
+        TypeEventDataSceneCaptureCompleteFB = 1000198001,
+        [Obsolete("Deprecated in favour of \"SceneCaptureRequestInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB")]
+        TypeSceneCaptureRequestInfoFB = 1000198050,
         [Obsolete("Deprecated in favour of \"SpaceContainerFB\"")]
         [NativeName("Name", "XR_TYPE_SPACE_CONTAINER_FB")]
         TypeSpaceContainerFB = 1000199000,
+        [Obsolete("Deprecated in favour of \"FoveationEyeTrackedProfileCreateInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META")]
+        TypeFoveationEyeTrackedProfileCreateInfoMeta = 1000200000,
+        [Obsolete("Deprecated in favour of \"FoveationEyeTrackedStateMeta\"")]
+        [NativeName("Name", "XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META")]
+        TypeFoveationEyeTrackedStateMeta = 1000200001,
+        [Obsolete("Deprecated in favour of \"SystemFoveationEyeTrackedPropertiesMeta\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META")]
+        TypeSystemFoveationEyeTrackedPropertiesMeta = 1000200002,
+        [Obsolete("Deprecated in favour of \"SystemFaceTrackingPropertiesFB\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB")]
+        TypeSystemFaceTrackingPropertiesFB = 1000201004,
+        [Obsolete("Deprecated in favour of \"FaceTrackerCreateInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_FACE_TRACKER_CREATE_INFO_FB")]
+        TypeFaceTrackerCreateInfoFB = 1000201005,
+        [Obsolete("Deprecated in favour of \"FaceExpressionInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_FACE_EXPRESSION_INFO_FB")]
+        TypeFaceExpressionInfoFB = 1000201002,
+        [Obsolete("Deprecated in favour of \"FaceExpressionWeightsFB\"")]
+        [NativeName("Name", "XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB")]
+        TypeFaceExpressionWeightsFB = 1000201006,
+        [Obsolete("Deprecated in favour of \"EyeTrackerCreateInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_EYE_TRACKER_CREATE_INFO_FB")]
+        TypeEyeTrackerCreateInfoFB = 1000202001,
+        [Obsolete("Deprecated in favour of \"EyeGazesInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_EYE_GAZES_INFO_FB")]
+        TypeEyeGazesInfoFB = 1000202002,
+        [Obsolete("Deprecated in favour of \"EyeGazesFB\"")]
+        [NativeName("Name", "XR_TYPE_EYE_GAZES_FB")]
+        TypeEyeGazesFB = 1000202003,
+        [Obsolete("Deprecated in favour of \"SystemEyeTrackingPropertiesFB\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB")]
+        TypeSystemEyeTrackingPropertiesFB = 1000202004,
         [Obsolete("Deprecated in favour of \"PassthroughKeyboardHandsIntensityFB\"")]
         [NativeName("Name", "XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB")]
         TypePassthroughKeyboardHandsIntensityFB = 1000203002,
         [Obsolete("Deprecated in favour of \"CompositionLayerSettingsFB\"")]
         [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB")]
         TypeCompositionLayerSettingsFB = 1000204000,
+        [Obsolete("Deprecated in favour of \"HapticPcmVibrationFB\"")]
+        [NativeName("Name", "XR_TYPE_HAPTIC_PCM_VIBRATION_FB")]
+        TypeHapticPcmVibrationFB = 1000209001,
+        [Obsolete("Deprecated in favour of \"DevicePcmSampleRateStateFB\"")]
+        [NativeName("Name", "XR_TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB")]
+        TypeDevicePcmSampleRateStateFB = 1000209002,
+        [Obsolete("Deprecated in favour of \"DevicePcmSampleRateGetInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_DEVICE_PCM_SAMPLE_RATE_GET_INFO_FB")]
+        TypeDevicePcmSampleRateGetInfoFB = 1000209002,
+        [Obsolete("Deprecated in favour of \"CompositionLayerDepthTestFB\"")]
+        [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB")]
+        TypeCompositionLayerDepthTestFB = 1000212000,
+        [Obsolete("Deprecated in favour of \"LocalDimmingFrameEndInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META")]
+        TypeLocalDimmingFrameEndInfoMeta = 1000216000,
+        [Obsolete("Deprecated in favour of \"PassthroughPreferencesMeta\"")]
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_PREFERENCES_META")]
+        TypePassthroughPreferencesMeta = 1000217000,
+        [Obsolete("Deprecated in favour of \"SystemVirtualKeyboardPropertiesMeta\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META")]
+        TypeSystemVirtualKeyboardPropertiesMeta = 1000219001,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardCreateInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META")]
+        TypeVirtualKeyboardCreateInfoMeta = 1000219002,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardSpaceCreateInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META")]
+        TypeVirtualKeyboardSpaceCreateInfoMeta = 1000219003,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardLocationInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META")]
+        TypeVirtualKeyboardLocationInfoMeta = 1000219004,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardModelVisibilitySetInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META")]
+        TypeVirtualKeyboardModelVisibilitySetInfoMeta = 1000219005,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardAnimationStateMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META")]
+        TypeVirtualKeyboardAnimationStateMeta = 1000219006,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardModelAnimationStatesMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META")]
+        TypeVirtualKeyboardModelAnimationStatesMeta = 1000219007,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardTextureDataMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META")]
+        TypeVirtualKeyboardTextureDataMeta = 1000219009,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardInputInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META")]
+        TypeVirtualKeyboardInputInfoMeta = 1000219010,
+        [Obsolete("Deprecated in favour of \"VirtualKeyboardTextContextChangeInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META")]
+        TypeVirtualKeyboardTextContextChangeInfoMeta = 1000219011,
+        [Obsolete("Deprecated in favour of \"EventDataVirtualKeyboardCommitTextMeta\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META")]
+        TypeEventDataVirtualKeyboardCommitTextMeta = 1000219014,
+        [Obsolete("Deprecated in favour of \"EventDataVirtualKeyboardBackspaceMeta\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META")]
+        TypeEventDataVirtualKeyboardBackspaceMeta = 1000219015,
+        [Obsolete("Deprecated in favour of \"EventDataVirtualKeyboardEnterMeta\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META")]
+        TypeEventDataVirtualKeyboardEnterMeta = 1000219016,
+        [Obsolete("Deprecated in favour of \"EventDataVirtualKeyboardShownMeta\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META")]
+        TypeEventDataVirtualKeyboardShownMeta = 1000219017,
+        [Obsolete("Deprecated in favour of \"EventDataVirtualKeyboardHiddenMeta\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META")]
+        TypeEventDataVirtualKeyboardHiddenMeta = 1000219018,
+        [Obsolete("Deprecated in favour of \"ExternalCameraOculus\"")]
+        [NativeName("Name", "XR_TYPE_EXTERNAL_CAMERA_OCULUS")]
+        TypeExternalCameraOculus = 1000226000,
         [Obsolete("Deprecated in favour of \"VulkanSwapchainCreateInfoMeta\"")]
         [NativeName("Name", "XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META")]
         TypeVulkanSwapchainCreateInfoMeta = 1000227000,
@@ -714,6 +975,234 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"PerformanceMetricsCounterMeta\"")]
         [NativeName("Name", "XR_TYPE_PERFORMANCE_METRICS_COUNTER_META")]
         TypePerformanceMetricsCounterMeta = 1000232002,
+        [Obsolete("Deprecated in favour of \"SpaceListSaveInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_LIST_SAVE_INFO_FB")]
+        TypeSpaceListSaveInfoFB = 1000238000,
+        [Obsolete("Deprecated in favour of \"EventDataSpaceListSaveCompleteFB\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB")]
+        TypeEventDataSpaceListSaveCompleteFB = 1000238001,
+        [Obsolete("Deprecated in favour of \"SpaceUserCreateInfoFB\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_USER_CREATE_INFO_FB")]
+        TypeSpaceUserCreateInfoFB = 1000241001,
+        [Obsolete("Deprecated in favour of \"SystemHeadsetIDPropertiesMeta\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META")]
+        TypeSystemHeadsetIDPropertiesMeta = 1000245000,
+        [Obsolete("Deprecated in favour of \"RecommendedLayerResolutionMeta\"")]
+        [NativeName("Name", "XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META")]
+        TypeRecommendedLayerResolutionMeta = 1000254000,
+        [Obsolete("Deprecated in favour of \"RecommendedLayerResolutionGetInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META")]
+        TypeRecommendedLayerResolutionGetInfoMeta = 1000254001,
+        [Obsolete("Deprecated in favour of \"SystemPassthroughColorLutPropertiesMeta\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META")]
+        TypeSystemPassthroughColorLutPropertiesMeta = 1000266000,
+        [Obsolete("Deprecated in favour of \"PassthroughColorLutCreateInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META")]
+        TypePassthroughColorLutCreateInfoMeta = 1000266001,
+        [Obsolete("Deprecated in favour of \"PassthroughColorLutUpdateInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META")]
+        TypePassthroughColorLutUpdateInfoMeta = 1000266002,
+        [Obsolete("Deprecated in favour of \"PassthroughColorMapLutMeta\"")]
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META")]
+        TypePassthroughColorMapLutMeta = 1000266100,
+        [Obsolete("Deprecated in favour of \"PassthroughColorMapInterpolatedLutMeta\"")]
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META")]
+        TypePassthroughColorMapInterpolatedLutMeta = 1000266101,
+        [Obsolete("Deprecated in favour of \"SpaceTriangleMeshGetInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META")]
+        TypeSpaceTriangleMeshGetInfoMeta = 1000269001,
+        [Obsolete("Deprecated in favour of \"SpaceTriangleMeshMeta\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_TRIANGLE_MESH_META")]
+        TypeSpaceTriangleMeshMeta = 1000269002,
+        [Obsolete("Deprecated in favour of \"SystemFaceTrackingProperties2FB\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB")]
+        TypeSystemFaceTrackingProperties2FB = 1000287013,
+        [Obsolete("Deprecated in favour of \"FaceTrackerCreateInfo2FB\"")]
+        [NativeName("Name", "XR_TYPE_FACE_TRACKER_CREATE_INFO2_FB")]
+        TypeFaceTrackerCreateInfo2FB = 1000287014,
+        [Obsolete("Deprecated in favour of \"FaceExpressionInfo2FB\"")]
+        [NativeName("Name", "XR_TYPE_FACE_EXPRESSION_INFO2_FB")]
+        TypeFaceExpressionInfo2FB = 1000287015,
+        [Obsolete("Deprecated in favour of \"FaceExpressionWeights2FB\"")]
+        [NativeName("Name", "XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB")]
+        TypeFaceExpressionWeights2FB = 1000287016,
+        [Obsolete("Deprecated in favour of \"EnvironmentDepthProviderCreateInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META")]
+        TypeEnvironmentDepthProviderCreateInfoMeta = 1000291000,
+        [Obsolete("Deprecated in favour of \"EnvironmentDepthSwapchainCreateInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META")]
+        TypeEnvironmentDepthSwapchainCreateInfoMeta = 1000291001,
+        [Obsolete("Deprecated in favour of \"EnvironmentDepthSwapchainStateMeta\"")]
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META")]
+        TypeEnvironmentDepthSwapchainStateMeta = 1000291002,
+        [Obsolete("Deprecated in favour of \"EnvironmentDepthImageAcquireInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META")]
+        TypeEnvironmentDepthImageAcquireInfoMeta = 1000291003,
+        [Obsolete("Deprecated in favour of \"EnvironmentDepthImageViewMeta\"")]
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META")]
+        TypeEnvironmentDepthImageViewMeta = 1000291004,
+        [Obsolete("Deprecated in favour of \"EnvironmentDepthImageMeta\"")]
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META")]
+        TypeEnvironmentDepthImageMeta = 1000291005,
+        [Obsolete("Deprecated in favour of \"EnvironmentDepthHandRemovalSetInfoMeta\"")]
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META")]
+        TypeEnvironmentDepthHandRemovalSetInfoMeta = 1000291006,
+        [Obsolete("Deprecated in favour of \"SystemEnvironmentDepthPropertiesMeta\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META")]
+        TypeSystemEnvironmentDepthPropertiesMeta = 1000291007,
+        [Obsolete("Deprecated in favour of \"PassthroughCreateInfoHtc\"")]
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC")]
+        TypePassthroughCreateInfoHtc = 1000317001,
+        [Obsolete("Deprecated in favour of \"PassthroughColorHtc\"")]
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_HTC")]
+        TypePassthroughColorHtc = 1000317002,
+        [Obsolete("Deprecated in favour of \"PassthroughMeshTransformInfoHtc\"")]
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC")]
+        TypePassthroughMeshTransformInfoHtc = 1000317003,
+        [Obsolete("Deprecated in favour of \"CompositionLayerPassthroughHtc\"")]
+        [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC")]
+        TypeCompositionLayerPassthroughHtc = 1000317004,
+        [Obsolete("Deprecated in favour of \"FoveationApplyInfoHtc\"")]
+        [NativeName("Name", "XR_TYPE_FOVEATION_APPLY_INFO_HTC")]
+        TypeFoveationApplyInfoHtc = 1000318000,
+        [Obsolete("Deprecated in favour of \"FoveationDynamicModeInfoHtc\"")]
+        [NativeName("Name", "XR_TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC")]
+        TypeFoveationDynamicModeInfoHtc = 1000318001,
+        [Obsolete("Deprecated in favour of \"FoveationCustomModeInfoHtc\"")]
+        [NativeName("Name", "XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC")]
+        TypeFoveationCustomModeInfoHtc = 1000318002,
+        [Obsolete("Deprecated in favour of \"SystemAnchorPropertiesHtc\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC")]
+        TypeSystemAnchorPropertiesHtc = 1000319000,
+        [Obsolete("Deprecated in favour of \"SpatialAnchorCreateInfoHtc\"")]
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC")]
+        TypeSpatialAnchorCreateInfoHtc = 1000319001,
+        [Obsolete("Deprecated in favour of \"SystemBodyTrackingPropertiesHtc\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC")]
+        TypeSystemBodyTrackingPropertiesHtc = 1000320000,
+        [Obsolete("Deprecated in favour of \"BodyTrackerCreateInfoHtc\"")]
+        [NativeName("Name", "XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC")]
+        TypeBodyTrackerCreateInfoHtc = 1000320001,
+        [Obsolete("Deprecated in favour of \"BodyJointsLocateInfoHtc\"")]
+        [NativeName("Name", "XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC")]
+        TypeBodyJointsLocateInfoHtc = 1000320002,
+        [Obsolete("Deprecated in favour of \"BodyJointLocationsHtc\"")]
+        [NativeName("Name", "XR_TYPE_BODY_JOINT_LOCATIONS_HTC")]
+        TypeBodyJointLocationsHtc = 1000320003,
+        [Obsolete("Deprecated in favour of \"BodySkeletonHtc\"")]
+        [NativeName("Name", "XR_TYPE_BODY_SKELETON_HTC")]
+        TypeBodySkeletonHtc = 1000320004,
+        [Obsolete("Deprecated in favour of \"ActiveActionSetPrioritiesExt\"")]
+        [NativeName("Name", "XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT")]
+        TypeActiveActionSetPrioritiesExt = 1000373000,
+        [Obsolete("Deprecated in favour of \"SystemForceFeedbackCurlPropertiesMndx\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX")]
+        TypeSystemForceFeedbackCurlPropertiesMndx = 1000375000,
+        [Obsolete("Deprecated in favour of \"ForceFeedbackCurlApplyLocationsMndx\"")]
+        [NativeName("Name", "XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX")]
+        TypeForceFeedbackCurlApplyLocationsMndx = 1000375001,
+        [Obsolete("Deprecated in favour of \"HandTrackingDataSourceInfoExt\"")]
+        [NativeName("Name", "XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT")]
+        TypeHandTrackingDataSourceInfoExt = 1000428000,
+        [Obsolete("Deprecated in favour of \"HandTrackingDataSourceStateExt\"")]
+        [NativeName("Name", "XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT")]
+        TypeHandTrackingDataSourceStateExt = 1000428001,
+        [Obsolete("Deprecated in favour of \"PlaneDetectorCreateInfoExt\"")]
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_CREATE_INFO_EXT")]
+        TypePlaneDetectorCreateInfoExt = 1000429001,
+        [Obsolete("Deprecated in favour of \"PlaneDetectorBeginInfoExt\"")]
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT")]
+        TypePlaneDetectorBeginInfoExt = 1000429002,
+        [Obsolete("Deprecated in favour of \"PlaneDetectorGetInfoExt\"")]
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_GET_INFO_EXT")]
+        TypePlaneDetectorGetInfoExt = 1000429003,
+        [Obsolete("Deprecated in favour of \"PlaneDetectorLocationsExt\"")]
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT")]
+        TypePlaneDetectorLocationsExt = 1000429004,
+        [Obsolete("Deprecated in favour of \"PlaneDetectorLocationExt\"")]
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_LOCATION_EXT")]
+        TypePlaneDetectorLocationExt = 1000429005,
+        [Obsolete("Deprecated in favour of \"PlaneDetectorPolygonBufferExt\"")]
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT")]
+        TypePlaneDetectorPolygonBufferExt = 1000429006,
+        [Obsolete("Deprecated in favour of \"SystemPlaneDetectionPropertiesExt\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT")]
+        TypeSystemPlaneDetectionPropertiesExt = 1000429007,
+        [Obsolete("Deprecated in favour of \"FutureCancelInfoExt\"")]
+        [NativeName("Name", "XR_TYPE_FUTURE_CANCEL_INFO_EXT")]
+        TypeFutureCancelInfoExt = 1000469000,
+        [Obsolete("Deprecated in favour of \"FuturePollInfoExt\"")]
+        [NativeName("Name", "XR_TYPE_FUTURE_POLL_INFO_EXT")]
+        TypeFuturePollInfoExt = 1000469001,
+        [Obsolete("Deprecated in favour of \"FutureCompletionExt\"")]
+        [NativeName("Name", "XR_TYPE_FUTURE_COMPLETION_EXT")]
+        TypeFutureCompletionExt = 1000469002,
+        [Obsolete("Deprecated in favour of \"FuturePollResultExt\"")]
+        [NativeName("Name", "XR_TYPE_FUTURE_POLL_RESULT_EXT")]
+        TypeFuturePollResultExt = 1000469003,
+        [Obsolete("Deprecated in favour of \"EventDataUserPresenceChangedExt\"")]
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT")]
+        TypeEventDataUserPresenceChangedExt = 1000470000,
+        [Obsolete("Deprecated in favour of \"SystemUserPresencePropertiesExt\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT")]
+        TypeSystemUserPresencePropertiesExt = 1000470001,
+        [Obsolete("Deprecated in favour of \"SpacesLocateInfoKhr\"")]
+        [NativeName("Name", "XR_TYPE_SPACES_LOCATE_INFO_KHR")]
+        TypeSpacesLocateInfoKhr = 1000471000,
+        [Obsolete("Deprecated in favour of \"SpaceLocationsKhr\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_LOCATIONS_KHR")]
+        TypeSpaceLocationsKhr = 1000471001,
+        [Obsolete("Deprecated in favour of \"SpaceVelocitiesKhr\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_VELOCITIES_KHR")]
+        TypeSpaceVelocitiesKhr = 1000471002,
+        [Obsolete("Deprecated in favour of \"SystemNotificationsSetInfoML\"")]
+        [NativeName("Name", "XR_TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML")]
+        TypeSystemNotificationsSetInfoML = 1000473000,
+        [Obsolete("Deprecated in favour of \"WorldMeshDetectorCreateInfoML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML")]
+        TypeWorldMeshDetectorCreateInfoML = 1000474001,
+        [Obsolete("Deprecated in favour of \"WorldMeshStateRequestInfoML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML")]
+        TypeWorldMeshStateRequestInfoML = 1000474002,
+        [Obsolete("Deprecated in favour of \"WorldMeshBlockStateML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BLOCK_STATE_ML")]
+        TypeWorldMeshBlockStateML = 1000474003,
+        [Obsolete("Deprecated in favour of \"WorldMeshStateRequestCompletionML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML")]
+        TypeWorldMeshStateRequestCompletionML = 1000474004,
+        [Obsolete("Deprecated in favour of \"WorldMeshBufferRecommendedSizeInfoML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML")]
+        TypeWorldMeshBufferRecommendedSizeInfoML = 1000474005,
+        [Obsolete("Deprecated in favour of \"WorldMeshBufferSizeML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML")]
+        TypeWorldMeshBufferSizeML = 1000474006,
+        [Obsolete("Deprecated in favour of \"WorldMeshBufferML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BUFFER_ML")]
+        TypeWorldMeshBufferML = 1000474007,
+        [Obsolete("Deprecated in favour of \"WorldMeshBlockRequestML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML")]
+        TypeWorldMeshBlockRequestML = 1000474008,
+        [Obsolete("Deprecated in favour of \"WorldMeshGetInfoML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_GET_INFO_ML")]
+        TypeWorldMeshGetInfoML = 1000474009,
+        [Obsolete("Deprecated in favour of \"WorldMeshBlockML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BLOCK_ML")]
+        TypeWorldMeshBlockML = 1000474010,
+        [Obsolete("Deprecated in favour of \"WorldMeshRequestCompletionML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML")]
+        TypeWorldMeshRequestCompletionML = 1000474011,
+        [Obsolete("Deprecated in favour of \"WorldMeshRequestCompletionInfoML\"")]
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML")]
+        TypeWorldMeshRequestCompletionInfoML = 1000474012,
+        [Obsolete("Deprecated in favour of \"SpacesLocateInfo\"")]
+        [NativeName("Name", "XR_TYPE_SPACES_LOCATE_INFO")]
+        TypeSpacesLocateInfo = 1000471000,
+        [Obsolete("Deprecated in favour of \"SpaceLocations\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_LOCATIONS")]
+        TypeSpaceLocations = 1000471001,
+        [Obsolete("Deprecated in favour of \"SpaceVelocities\"")]
+        [NativeName("Name", "XR_TYPE_SPACE_VELOCITIES")]
+        TypeSpaceVelocities = 1000471002,
         [NativeName("Name", "XR_TYPE_UNKNOWN")]
         Unknown = 0,
         [NativeName("Name", "XR_TYPE_API_LAYER_PROPERTIES")]
@@ -872,6 +1361,12 @@ namespace Silk.NET.OpenXR
         SwapchainImageD3D12Khr = 1000028001,
         [NativeName("Name", "XR_TYPE_GRAPHICS_REQUIREMENTS_D3D12_KHR")]
         GraphicsRequirementsD3D12Khr = 1000028002,
+        [NativeName("Name", "XR_TYPE_GRAPHICS_BINDING_METAL_KHR")]
+        GraphicsBindingMetalKhr = 1000029000,
+        [NativeName("Name", "XR_TYPE_SWAPCHAIN_IMAGE_METAL_KHR")]
+        SwapchainImageMetalKhr = 1000029001,
+        [NativeName("Name", "XR_TYPE_GRAPHICS_REQUIREMENTS_METAL_KHR")]
+        GraphicsRequirementsMetalKhr = 1000029002,
         [NativeName("Name", "XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT")]
         SystemEyeGazeInteractionPropertiesExt = 1000030000,
         [NativeName("Name", "XR_TYPE_EYE_GAZE_SAMPLE_TIME_EXT")]
@@ -960,6 +1455,16 @@ namespace Silk.NET.OpenXR
         AndroidSurfaceSwapchainCreateInfoFB = 1000070000,
         [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB")]
         CompositionLayerSecureContentFB = 1000072000,
+        [NativeName("Name", "XR_TYPE_BODY_TRACKER_CREATE_INFO_FB")]
+        BodyTrackerCreateInfoFB = 1000076001,
+        [NativeName("Name", "XR_TYPE_BODY_JOINTS_LOCATE_INFO_FB")]
+        BodyJointsLocateInfoFB = 1000076002,
+        [NativeName("Name", "XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB")]
+        SystemBodyTrackingPropertiesFB = 1000076004,
+        [NativeName("Name", "XR_TYPE_BODY_JOINT_LOCATIONS_FB")]
+        BodyJointLocationsFB = 1000076005,
+        [NativeName("Name", "XR_TYPE_BODY_SKELETON_FB")]
+        BodySkeletonFB = 1000076006,
         [NativeName("Name", "XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT")]
         InteractionProfileDpadBindingExt = 1000078000,
         [NativeName("Name", "XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE")]
@@ -1086,6 +1591,8 @@ namespace Silk.NET.OpenXR
         GeometryInstanceCreateInfoFB = 1000118004,
         [NativeName("Name", "XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB")]
         GeometryInstanceTransformFB = 1000118005,
+        [NativeName("Name", "XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB")]
+        SystemPassthroughProperties2FB = 1000118006,
         [NativeName("Name", "XR_TYPE_PASSTHROUGH_STYLE_FB")]
         PassthroughStyleFB = 1000118020,
         [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB")]
@@ -1124,10 +1631,88 @@ namespace Silk.NET.OpenXR
         EventDataMarkerTrackingUpdateVarjo = 1000124001,
         [NativeName("Name", "XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO")]
         MarkerSpaceCreateInfoVarjo = 1000124002,
+        [NativeName("Name", "XR_TYPE_FRAME_END_INFO_ML")]
+        FrameEndInfoML = 1000135000,
+        [NativeName("Name", "XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML")]
+        GlobalDimmerFrameEndInfoML = 1000136000,
+        [NativeName("Name", "XR_TYPE_COORDINATE_SPACE_CREATE_INFO_ML")]
+        CoordinateSpaceCreateInfoML = 1000137000,
+        [NativeName("Name", "XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML")]
+        SystemMarkerUnderstandingPropertiesML = 1000138000,
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML")]
+        MarkerDetectorCreateInfoML = 1000138001,
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML")]
+        MarkerDetectorArucoInfoML = 1000138002,
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML")]
+        MarkerDetectorSizeInfoML = 1000138003,
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML")]
+        MarkerDetectorAprilTagInfoML = 1000138004,
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML")]
+        MarkerDetectorCustomProfileInfoML = 1000138005,
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML")]
+        MarkerDetectorSnapshotInfoML = 1000138006,
+        [NativeName("Name", "XR_TYPE_MARKER_DETECTOR_STATE_ML")]
+        MarkerDetectorStateML = 1000138007,
+        [NativeName("Name", "XR_TYPE_MARKER_SPACE_CREATE_INFO_ML")]
+        MarkerSpaceCreateInfoML = 1000138008,
+        [NativeName("Name", "XR_TYPE_LOCALIZATION_MAP_ML")]
+        LocalizationMapML = 1000139000,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML")]
+        EventDataLocalizationChangedML = 1000139001,
+        [NativeName("Name", "XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML")]
+        MapLocalizationRequestInfoML = 1000139002,
+        [NativeName("Name", "XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML")]
+        LocalizationMapImportInfoML = 1000139003,
+        [NativeName("Name", "XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML")]
+        LocalizationEnableEventsInfoML = 1000139004,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML")]
+        SpatialAnchorsCreateInfoFromPoseML = 1000140000,
+        [NativeName("Name", "XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML")]
+        CreateSpatialAnchorsCompletionML = 1000140001,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHOR_STATE_ML")]
+        SpatialAnchorStateML = 1000140002,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML")]
+        SpatialAnchorsCreateStorageInfoML = 1000141000,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML")]
+        SpatialAnchorsQueryInfoRadiusML = 1000141001,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML")]
+        SpatialAnchorsQueryCompletionML = 1000141002,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML")]
+        SpatialAnchorsCreateInfoFromUuidsML = 1000141003,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML")]
+        SpatialAnchorsPublishInfoML = 1000141004,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML")]
+        SpatialAnchorsPublishCompletionML = 1000141005,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML")]
+        SpatialAnchorsDeleteInfoML = 1000141006,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML")]
+        SpatialAnchorsDeleteCompletionML = 1000141007,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML")]
+        SpatialAnchorsUpdateExpirationInfoML = 1000141008,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML")]
+        SpatialAnchorsUpdateExpirationCompletionML = 1000141009,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML")]
+        SpatialAnchorsPublishCompletionDetailsML = 1000141010,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML")]
+        SpatialAnchorsDeleteCompletionDetailsML = 1000141011,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML")]
+        SpatialAnchorsUpdateExpirationCompletionDetailsML = 1000141012,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML")]
+        EventDataHeadsetFitChangedML = 1000472000,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML")]
+        EventDataEyeCalibrationChangedML = 1000472001,
+        [NativeName("Name", "XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML")]
+        UserCalibrationEnableEventsInfoML = 1000472002,
         [NativeName("Name", "XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT")]
         SpatialAnchorPersistenceInfoMsft = 1000142000,
         [NativeName("Name", "XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT")]
         SpatialAnchorFromPersistedAnchorCreateInfoMsft = 1000142001,
+        [NativeName("Name", "XR_TYPE_SCENE_MARKERS_MSFT")]
+        SceneMarkersMsft = 1000147000,
+        [NativeName("Name", "XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT")]
+        SceneMarkerTypeFilterMsft = 1000147001,
+        [NativeName("Name", "XR_TYPE_SCENE_MARKER_QR_CODES_MSFT")]
+        SceneMarkerQRCodesMsft = 1000147002,
         [NativeName("Name", "XR_TYPE_SPACE_QUERY_INFO_FB")]
         SpaceQueryInfoFB = 1000156001,
         [NativeName("Name", "XR_TYPE_SPACE_QUERY_RESULTS_FB")]
@@ -1158,29 +1743,259 @@ namespace Silk.NET.OpenXR
         SwapchainStateSamplerOpenglESFB = 1000162000,
         [NativeName("Name", "XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB")]
         SwapchainStateSamplerVulkanFB = 1000163000,
+        [NativeName("Name", "XR_TYPE_SPACE_SHARE_INFO_FB")]
+        SpaceShareInfoFB = 1000169001,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB")]
+        EventDataSpaceShareCompleteFB = 1000169002,
         [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB")]
         CompositionLayerSpaceWarpInfoFB = 1000171000,
         [NativeName("Name", "XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB")]
         SystemSpaceWarpPropertiesFB = 1000171001,
+        [NativeName("Name", "XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB")]
+        HapticAmplitudeEnvelopeVibrationFB = 1000173001,
         [NativeName("Name", "XR_TYPE_SEMANTIC_LABELS_FB")]
         SemanticLabelsFB = 1000175000,
         [NativeName("Name", "XR_TYPE_ROOM_LAYOUT_FB")]
         RoomLayoutFB = 1000175001,
         [NativeName("Name", "XR_TYPE_BOUNDARY_2D_FB")]
         Boundary2DFB = 1000175002,
+        [NativeName("Name", "XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB")]
+        SemanticLabelsSupportInfoFB = 1000175010,
         [NativeName("Name", "XR_TYPE_DIGITAL_LENS_CONTROL_ALMALENCE")]
         DigitalLensControlAlmalence = 1000196000,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB")]
+        EventDataSceneCaptureCompleteFB = 1000198001,
+        [NativeName("Name", "XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB")]
+        SceneCaptureRequestInfoFB = 1000198050,
         [NativeName("Name", "XR_TYPE_SPACE_CONTAINER_FB")]
         SpaceContainerFB = 1000199000,
+        [NativeName("Name", "XR_TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META")]
+        FoveationEyeTrackedProfileCreateInfoMeta = 1000200000,
+        [NativeName("Name", "XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META")]
+        FoveationEyeTrackedStateMeta = 1000200001,
+        [NativeName("Name", "XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META")]
+        SystemFoveationEyeTrackedPropertiesMeta = 1000200002,
+        [NativeName("Name", "XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB")]
+        SystemFaceTrackingPropertiesFB = 1000201004,
+        [NativeName("Name", "XR_TYPE_FACE_TRACKER_CREATE_INFO_FB")]
+        FaceTrackerCreateInfoFB = 1000201005,
+        [NativeName("Name", "XR_TYPE_FACE_EXPRESSION_INFO_FB")]
+        FaceExpressionInfoFB = 1000201002,
+        [NativeName("Name", "XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB")]
+        FaceExpressionWeightsFB = 1000201006,
+        [NativeName("Name", "XR_TYPE_EYE_TRACKER_CREATE_INFO_FB")]
+        EyeTrackerCreateInfoFB = 1000202001,
+        [NativeName("Name", "XR_TYPE_EYE_GAZES_INFO_FB")]
+        EyeGazesInfoFB = 1000202002,
+        [NativeName("Name", "XR_TYPE_EYE_GAZES_FB")]
+        EyeGazesFB = 1000202003,
+        [NativeName("Name", "XR_TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB")]
+        SystemEyeTrackingPropertiesFB = 1000202004,
         [NativeName("Name", "XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB")]
         PassthroughKeyboardHandsIntensityFB = 1000203002,
         [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB")]
         CompositionLayerSettingsFB = 1000204000,
+        [NativeName("Name", "XR_TYPE_HAPTIC_PCM_VIBRATION_FB")]
+        HapticPcmVibrationFB = 1000209001,
+        [NativeName("Name", "XR_TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB")]
+        DevicePcmSampleRateStateFB = 1000209002,
+        [NativeName("Name", "XR_TYPE_DEVICE_PCM_SAMPLE_RATE_GET_INFO_FB")]
+        DevicePcmSampleRateGetInfoFB = 1000209002,
+        [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB")]
+        CompositionLayerDepthTestFB = 1000212000,
+        [NativeName("Name", "XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META")]
+        LocalDimmingFrameEndInfoMeta = 1000216000,
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_PREFERENCES_META")]
+        PassthroughPreferencesMeta = 1000217000,
+        [NativeName("Name", "XR_TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META")]
+        SystemVirtualKeyboardPropertiesMeta = 1000219001,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META")]
+        VirtualKeyboardCreateInfoMeta = 1000219002,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META")]
+        VirtualKeyboardSpaceCreateInfoMeta = 1000219003,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META")]
+        VirtualKeyboardLocationInfoMeta = 1000219004,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META")]
+        VirtualKeyboardModelVisibilitySetInfoMeta = 1000219005,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META")]
+        VirtualKeyboardAnimationStateMeta = 1000219006,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META")]
+        VirtualKeyboardModelAnimationStatesMeta = 1000219007,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META")]
+        VirtualKeyboardTextureDataMeta = 1000219009,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META")]
+        VirtualKeyboardInputInfoMeta = 1000219010,
+        [NativeName("Name", "XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META")]
+        VirtualKeyboardTextContextChangeInfoMeta = 1000219011,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META")]
+        EventDataVirtualKeyboardCommitTextMeta = 1000219014,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META")]
+        EventDataVirtualKeyboardBackspaceMeta = 1000219015,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META")]
+        EventDataVirtualKeyboardEnterMeta = 1000219016,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META")]
+        EventDataVirtualKeyboardShownMeta = 1000219017,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META")]
+        EventDataVirtualKeyboardHiddenMeta = 1000219018,
+        [NativeName("Name", "XR_TYPE_EXTERNAL_CAMERA_OCULUS")]
+        ExternalCameraOculus = 1000226000,
         [NativeName("Name", "XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META")]
         VulkanSwapchainCreateInfoMeta = 1000227000,
         [NativeName("Name", "XR_TYPE_PERFORMANCE_METRICS_STATE_META")]
         PerformanceMetricsStateMeta = 1000232001,
         [NativeName("Name", "XR_TYPE_PERFORMANCE_METRICS_COUNTER_META")]
         PerformanceMetricsCounterMeta = 1000232002,
+        [NativeName("Name", "XR_TYPE_SPACE_LIST_SAVE_INFO_FB")]
+        SpaceListSaveInfoFB = 1000238000,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB")]
+        EventDataSpaceListSaveCompleteFB = 1000238001,
+        [NativeName("Name", "XR_TYPE_SPACE_USER_CREATE_INFO_FB")]
+        SpaceUserCreateInfoFB = 1000241001,
+        [NativeName("Name", "XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META")]
+        SystemHeadsetIDPropertiesMeta = 1000245000,
+        [NativeName("Name", "XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META")]
+        RecommendedLayerResolutionMeta = 1000254000,
+        [NativeName("Name", "XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META")]
+        RecommendedLayerResolutionGetInfoMeta = 1000254001,
+        [NativeName("Name", "XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META")]
+        SystemPassthroughColorLutPropertiesMeta = 1000266000,
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META")]
+        PassthroughColorLutCreateInfoMeta = 1000266001,
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META")]
+        PassthroughColorLutUpdateInfoMeta = 1000266002,
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META")]
+        PassthroughColorMapLutMeta = 1000266100,
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META")]
+        PassthroughColorMapInterpolatedLutMeta = 1000266101,
+        [NativeName("Name", "XR_TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META")]
+        SpaceTriangleMeshGetInfoMeta = 1000269001,
+        [NativeName("Name", "XR_TYPE_SPACE_TRIANGLE_MESH_META")]
+        SpaceTriangleMeshMeta = 1000269002,
+        [NativeName("Name", "XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB")]
+        SystemFaceTrackingProperties2FB = 1000287013,
+        [NativeName("Name", "XR_TYPE_FACE_TRACKER_CREATE_INFO2_FB")]
+        FaceTrackerCreateInfo2FB = 1000287014,
+        [NativeName("Name", "XR_TYPE_FACE_EXPRESSION_INFO2_FB")]
+        FaceExpressionInfo2FB = 1000287015,
+        [NativeName("Name", "XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB")]
+        FaceExpressionWeights2FB = 1000287016,
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META")]
+        EnvironmentDepthProviderCreateInfoMeta = 1000291000,
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META")]
+        EnvironmentDepthSwapchainCreateInfoMeta = 1000291001,
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META")]
+        EnvironmentDepthSwapchainStateMeta = 1000291002,
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META")]
+        EnvironmentDepthImageAcquireInfoMeta = 1000291003,
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META")]
+        EnvironmentDepthImageViewMeta = 1000291004,
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META")]
+        EnvironmentDepthImageMeta = 1000291005,
+        [NativeName("Name", "XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META")]
+        EnvironmentDepthHandRemovalSetInfoMeta = 1000291006,
+        [NativeName("Name", "XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META")]
+        SystemEnvironmentDepthPropertiesMeta = 1000291007,
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC")]
+        PassthroughCreateInfoHtc = 1000317001,
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_COLOR_HTC")]
+        PassthroughColorHtc = 1000317002,
+        [NativeName("Name", "XR_TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC")]
+        PassthroughMeshTransformInfoHtc = 1000317003,
+        [NativeName("Name", "XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC")]
+        CompositionLayerPassthroughHtc = 1000317004,
+        [NativeName("Name", "XR_TYPE_FOVEATION_APPLY_INFO_HTC")]
+        FoveationApplyInfoHtc = 1000318000,
+        [NativeName("Name", "XR_TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC")]
+        FoveationDynamicModeInfoHtc = 1000318001,
+        [NativeName("Name", "XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC")]
+        FoveationCustomModeInfoHtc = 1000318002,
+        [NativeName("Name", "XR_TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC")]
+        SystemAnchorPropertiesHtc = 1000319000,
+        [NativeName("Name", "XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC")]
+        SpatialAnchorCreateInfoHtc = 1000319001,
+        [NativeName("Name", "XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC")]
+        SystemBodyTrackingPropertiesHtc = 1000320000,
+        [NativeName("Name", "XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC")]
+        BodyTrackerCreateInfoHtc = 1000320001,
+        [NativeName("Name", "XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC")]
+        BodyJointsLocateInfoHtc = 1000320002,
+        [NativeName("Name", "XR_TYPE_BODY_JOINT_LOCATIONS_HTC")]
+        BodyJointLocationsHtc = 1000320003,
+        [NativeName("Name", "XR_TYPE_BODY_SKELETON_HTC")]
+        BodySkeletonHtc = 1000320004,
+        [NativeName("Name", "XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT")]
+        ActiveActionSetPrioritiesExt = 1000373000,
+        [NativeName("Name", "XR_TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX")]
+        SystemForceFeedbackCurlPropertiesMndx = 1000375000,
+        [NativeName("Name", "XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX")]
+        ForceFeedbackCurlApplyLocationsMndx = 1000375001,
+        [NativeName("Name", "XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT")]
+        HandTrackingDataSourceInfoExt = 1000428000,
+        [NativeName("Name", "XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT")]
+        HandTrackingDataSourceStateExt = 1000428001,
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_CREATE_INFO_EXT")]
+        PlaneDetectorCreateInfoExt = 1000429001,
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT")]
+        PlaneDetectorBeginInfoExt = 1000429002,
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_GET_INFO_EXT")]
+        PlaneDetectorGetInfoExt = 1000429003,
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT")]
+        PlaneDetectorLocationsExt = 1000429004,
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_LOCATION_EXT")]
+        PlaneDetectorLocationExt = 1000429005,
+        [NativeName("Name", "XR_TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT")]
+        PlaneDetectorPolygonBufferExt = 1000429006,
+        [NativeName("Name", "XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT")]
+        SystemPlaneDetectionPropertiesExt = 1000429007,
+        [NativeName("Name", "XR_TYPE_FUTURE_CANCEL_INFO_EXT")]
+        FutureCancelInfoExt = 1000469000,
+        [NativeName("Name", "XR_TYPE_FUTURE_POLL_INFO_EXT")]
+        FuturePollInfoExt = 1000469001,
+        [NativeName("Name", "XR_TYPE_FUTURE_COMPLETION_EXT")]
+        FutureCompletionExt = 1000469002,
+        [NativeName("Name", "XR_TYPE_FUTURE_POLL_RESULT_EXT")]
+        FuturePollResultExt = 1000469003,
+        [NativeName("Name", "XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT")]
+        EventDataUserPresenceChangedExt = 1000470000,
+        [NativeName("Name", "XR_TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT")]
+        SystemUserPresencePropertiesExt = 1000470001,
+        [NativeName("Name", "XR_TYPE_SPACES_LOCATE_INFO_KHR")]
+        SpacesLocateInfoKhr = 1000471000,
+        [NativeName("Name", "XR_TYPE_SPACE_LOCATIONS_KHR")]
+        SpaceLocationsKhr = 1000471001,
+        [NativeName("Name", "XR_TYPE_SPACE_VELOCITIES_KHR")]
+        SpaceVelocitiesKhr = 1000471002,
+        [NativeName("Name", "XR_TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML")]
+        SystemNotificationsSetInfoML = 1000473000,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML")]
+        WorldMeshDetectorCreateInfoML = 1000474001,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML")]
+        WorldMeshStateRequestInfoML = 1000474002,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BLOCK_STATE_ML")]
+        WorldMeshBlockStateML = 1000474003,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML")]
+        WorldMeshStateRequestCompletionML = 1000474004,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML")]
+        WorldMeshBufferRecommendedSizeInfoML = 1000474005,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML")]
+        WorldMeshBufferSizeML = 1000474006,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BUFFER_ML")]
+        WorldMeshBufferML = 1000474007,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML")]
+        WorldMeshBlockRequestML = 1000474008,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_GET_INFO_ML")]
+        WorldMeshGetInfoML = 1000474009,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_BLOCK_ML")]
+        WorldMeshBlockML = 1000474010,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML")]
+        WorldMeshRequestCompletionML = 1000474011,
+        [NativeName("Name", "XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML")]
+        WorldMeshRequestCompletionInfoML = 1000474012,
+        [NativeName("Name", "XR_TYPE_SPACES_LOCATE_INFO")]
+        SpacesLocateInfo = 1000471000,
+        [NativeName("Name", "XR_TYPE_SPACE_LOCATIONS")]
+        SpaceLocations = 1000471001,
+        [NativeName("Name", "XR_TYPE_SPACE_VELOCITIES")]
+        SpaceVelocities = 1000471002,
     }
 }

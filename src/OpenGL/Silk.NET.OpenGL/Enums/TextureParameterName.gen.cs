@@ -122,6 +122,8 @@ namespace Silk.NET.OpenGL
         TextureMaxClampTSgix = 0x836A,
         [NativeName("Name", "GL_TEXTURE_MAX_CLAMP_R_SGIX")]
         TextureMaxClampRSgix = 0x836B,
+        [NativeName("Name", "GL_TEXTURE_MEMORY_LAYOUT_INTEL")]
+        TextureMemoryLayoutIntel = 0x83FF,
         [NativeName("Name", "GL_TEXTURE_MAX_ANISOTROPY")]
         TextureMaxAnisotropy = 0x84FE,
         [NativeName("Name", "GL_TEXTURE_LOD_BIAS")]
@@ -148,5 +150,9 @@ namespace Silk.NET.OpenGL
         TextureTilingExt = 0x9580,
         [NativeName("Name", "GL_TEXTURE_FOVEATED_CUTOFF_DENSITY_QCOM")]
         TextureFoveatedCutoffDensityQCom = 0x96A0,
+        [NativeName("Name", "GL_TEXTURE_Y_DEGAMMA_QCOM")]
+        TextureYDegammaQCom = 0x9710,
+        [NativeName("Name", "GL_TEXTURE_CBCR_DEGAMMA_QCOM")]
+        TextureCbcrDegammaQCom = 0x9711,
     }
 }

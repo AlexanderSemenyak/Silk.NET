@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Silk.NET.Core.Attributes;
 using Silk.NET.Core.Contexts;
 using Silk.NET.Core.Loader;
@@ -25,8 +26,7 @@ namespace Silk.NET.OpenAL
         {
         }
 
-        public SearchPathContainer SearchPaths => _searchPaths ??= (_soft
-             ? new OpenALSoftLibraryNameContainer() : new OpenALLibraryNameContainer());
+        public SearchPathContainer SearchPaths => _searchPaths ??= new OpenALLibraryNameContainer(_soft);
 
         public override unsafe bool IsExtensionPresent(string name)
             => IsExtensionPresent(GetContextsDevice(GetCurrentContext()), name);
@@ -85,13 +85,13 @@ namespace Silk.NET.OpenAL
         /// <summary>
         /// Gets an instance of the API.
         /// </summary>
-        /// <param name="soft">Use OpenAL Soft libraries.</param>
+        /// <param name="soft">Prefer OpenAL Soft libraries.</param>
         /// <returns>The instance.</returns>
         public static unsafe ALContext GetApi(bool soft = false)
         {
-            SearchPathContainer searchPaths = soft ? new OpenALSoftLibraryNameContainer() : new OpenALLibraryNameContainer();
+            SearchPathContainer searchPaths = new OpenALLibraryNameContainer(soft);
             var ctx = new MultiNativeContext
-                (CreateDefaultContext(searchPaths.GetLibraryName()), null);
+                (CreateDefaultContext(searchPaths.GetLibraryNames()), null);
             var ret = new ALContext(ctx);
             ret._soft = soft;
             ret._searchPaths = searchPaths;
@@ -118,7 +118,11 @@ namespace Silk.NET.OpenAL
         /// <param name="device">The device the context is on.</param>
         /// <param name="ext">The extension to check for.</param>
         /// <returns>Whether the extension is available.</returns>
+#if NET5_0_OR_GREATER
+        public unsafe bool TryGetExtension<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] T>(Device* device, out T ext) where T : NativeExtension<ALContext>
+#else
         public unsafe bool TryGetExtension<T>(Device* device, out T ext) where T : NativeExtension<ALContext>
+#endif
             => !((ext = IsExtensionPresent(device, ExtensionAttribute.GetExtensionAttribute(typeof(T)).Name)
                 ? (T) Activator.CreateInstance(typeof(T), Context)
                 : null) is null);

@@ -17,16 +17,13 @@ namespace Silk.NET.DirectStorage
     {
         public static DStorage GetApi()
         {
-             return new(CreateDefaultContext(new DStorageLibraryNameContainer().GetLibraryName()));
+             return new(CreateDefaultContext(new DStorageLibraryNameContainer().GetLibraryNames()));
         }
 
         public bool TryGetExtension<T>(out T ext)
             where T:NativeExtension<DStorage>
         {
-             ext = IsExtensionPresent(GetExtensionAttribute(typeof(T)).Name)
-                 ? (T) Activator.CreateInstance(typeof(T), Context)
-                 : null;
-             return ext is not null;
+            throw new NotImplementedException();
         }
 
         public override bool IsExtensionPresent(string extension)

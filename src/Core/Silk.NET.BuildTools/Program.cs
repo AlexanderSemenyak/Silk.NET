@@ -16,9 +16,9 @@ using Silk.NET.BuildTools.Common;
 
 namespace Silk.NET.BuildTools
 {
-    internal class Program
+    public class Program
     {
-        private static int Main(string[] args)
+        public static int Main(string[] args)
         {
             Console.WriteLine("Silk.NET Build Tools");
             Console.WriteLine("Copyright (C) .NET Foundation and Contributors");
@@ -48,24 +48,60 @@ namespace Silk.NET.BuildTools
                 return 1;
             }
 
+            //If this is set it will scope the generation to only a single profile, eg only OpenGL or only WebGPU, or multiple comma-separated profiles
+            string[] profiles = null;
+
             var sw = Stopwatch.StartNew();
             var extraCtrls = new List<string>();
             var failedJobs = 0;
             Console.SetOut(ConsoleWriter.GetOrCreate(Console.Out));
+
+            //do one pass over the arguments, picking out the things that start with `--` (eg. control descriptors)
+            foreach (var arg in args)
+            {
+                if (!arg.StartsWith("--"))
+                {
+                    continue;
+                }
+
+                if (arg.StartsWith("--profile="))
+                {
+                    profiles = arg.Substring("--profile=".Length).Split(',');
+                    continue;
+                }
+
+                if (string.Equals(arg, "--no-parallel", StringComparison.OrdinalIgnoreCase))
+                {
+                    // picked up in Generator.cs
+                    continue;
+                }
+
+                Console.WriteLine($"Control descriptor \"{arg}\" will be applied to every job herein.");
+                extraCtrls.Add(arg[2..]);
+            }
+
+            //do a second pass over the arguments, picking out the things that dont start with `--` (eg. files)
             foreach (var arg in args)
             {
                 if (arg.StartsWith("--"))
                 {
-                    Console.WriteLine($"Control descriptor \"{arg}\" will be applied to every job herein.");
-                    extraCtrls.Add(arg[2..]);
                     continue;
                 }
-                
+
                 var jobSw = Stopwatch.StartNew();
                 var abs = Path.GetFullPath(arg);
                 Environment.CurrentDirectory = Path.GetDirectoryName
                     (abs) ?? throw new NullReferenceException("Dir path null.");
-                Generator.Run(AddDescriptors(JsonConvert.DeserializeObject<Config>(File.ReadAllText(abs)), extraCtrls));
+
+                var config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(abs));
+
+                //if the profile scope is set, set the tasks to generate to *only* the task that matches the name
+                if(profiles != null)
+                {
+                    config.Tasks = config.Tasks.Where(x => profiles.Any(profile => x.Name.Equals(profile, StringComparison.InvariantCultureIgnoreCase))).ToArray();
+                }
+
+                Generator.Run(AddDescriptors(config, extraCtrls));
             
                 jobSw.Stop();
                 Thread.Sleep(3000); // cooldown to ensure all the threads have reported their results.
@@ -78,16 +114,23 @@ namespace Silk.NET.BuildTools
                 {
                     if (kvp.Value.Success)
                     {
+                        Console.ForegroundColor = ConsoleColor.Green;
+
                         Console.WriteLine
                             ($"Task \"{kvp.Key}\" took {kvp.Value.Time.TotalSeconds} second(s) to complete.");
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
+
                         Console.WriteLine
                             ($"Task \"{kvp.Key}\" failed after {kvp.Value.Time.TotalSeconds} second(s).");
                         failedJobs++;
                     }
                 }
+                //reset the colour
+                Console.ResetColor();
+
                 Console.WriteLine();
                 Console.WriteLine($"In total, this particular job took {jobSw.Elapsed.TotalSeconds} second(s) to complete.");
                 Console.WriteLine();
@@ -119,7 +162,7 @@ namespace Silk.NET.BuildTools
             return 0;
         }
 
-        internal class ConsoleWriter : TextWriter
+        public class ConsoleWriter : TextWriter
         {
             internal static ConsoleWriter Instance { get; private set; }
             public ThreadLocal<string> CurrentName { get; private set; } = new ThreadLocal<string>();

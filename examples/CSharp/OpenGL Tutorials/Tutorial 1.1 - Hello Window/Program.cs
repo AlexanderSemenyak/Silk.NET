@@ -21,9 +21,15 @@ namespace Tutorial
             window.Load += OnLoad;
             window.Update += OnUpdate;
             window.Render += OnRender;
+            window.FramebufferResize += OnFramebufferResize;
 
             //Run the window.
             window.Run();
+
+            // window.Run() is a BLOCKING method - this means that it will halt execution of any code in the current
+            // method until the window has finished running. Therefore, this dispose method will not be called until you
+            // close the window.
+            window.Dispose();
         }
 
 
@@ -45,6 +51,11 @@ namespace Tutorial
         private static void OnUpdate(double obj)
         {
             //Here all updates to the program should be done.
+        }
+
+        private static void OnFramebufferResize(Vector2D<int> newSize)
+        {
+            //Update aspect ratios, clipping regions, viewports, etc.
         }
 
         private static void KeyDown(IKeyboard arg1, Key arg2, int arg3)

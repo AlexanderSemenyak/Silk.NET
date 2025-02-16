@@ -33,6 +33,7 @@ namespace Silk.NET.Core.Loader
         /// - <see cref="MainModuleDirectoryResolver" />
         /// - <see cref="RuntimesFolderResolver" />
         /// - <see cref="NativePackageResolver" />
+        /// - <see cref="SilkDirectoryResolver"/>
         /// </summary>
         public DefaultPathResolver() => Resolvers = new()
         {
@@ -42,7 +43,8 @@ namespace Silk.NET.Core.Loader
             BaseDirectoryResolver,
             MainModuleDirectoryResolver,
             RuntimesFolderResolver,
-            NativePackageResolver
+            NativePackageResolver,
+            SilkDirectoryResolver
         };
 
         /// <summary>
@@ -74,18 +76,63 @@ namespace Silk.NET.Core.Loader
         /// </summary>
         public static readonly Func<string, IEnumerable<string>> MainModuleDirectoryResolver = name =>
         {
-            var mainModFname = Process.GetCurrentProcess().MainModule?.FileName;
-            // check that name doesn't have a directory name, we only want raw filenames so that the Path.Combine
-            // doesn't blow up.
-            if (!string.IsNullOrWhiteSpace(Path.GetDirectoryName(name)) && mainModFname is not null)
+            try
             {
-                mainModFname = Path.GetDirectoryName(mainModFname);
-                if (mainModFname is not null)
+                var mainModFname = Process.GetCurrentProcess().MainModule?.FileName;
+                // check that name doesn't have a directory name, we only want raw filenames so that the Path.Combine
+                // doesn't blow up.
+                if (!string.IsNullOrWhiteSpace(Path.GetDirectoryName(name)) && mainModFname is not null)
                 {
-                    return Enumerable.Repeat(Path.Combine(mainModFname, name), 1);
+                    mainModFname = Path.GetDirectoryName(mainModFname);
+                    if (mainModFname is not null)
+                    {
+                        return Enumerable.Repeat(Path.Combine(mainModFname, name), 1);
+                    }
                 }
             }
-            
+            catch
+            {
+                // System.Diagnostics.Process is not supported on the WASI-SDK
+            }
+
+            return Enumerable.Empty<string>();
+        };
+
+        /// <summary>
+        /// A resolver that returns a path to a file in Silk.NET's <see cref="Assembly.Location"/> and/or
+        /// <see cref="Assembly.CodeBase"/> directory with the given name.
+        /// </summary>
+        public static readonly Func<string, IEnumerable<string>> SilkDirectoryResolver = name =>
+        {
+            try
+            {
+                var asmLocation = typeof(DefaultPathResolver).Assembly.Location;
+                // check that name doesn't have a directory name, we only want raw filenames so that the Path.Combine
+                // doesn't blow up.
+                if (!string.IsNullOrWhiteSpace(Path.GetDirectoryName(name)) && !string.IsNullOrWhiteSpace(asmLocation) && File.Exists(asmLocation))
+                {
+                    asmLocation = Path.GetDirectoryName(asmLocation);
+                    if (asmLocation is not null)
+                    {
+                        return Enumerable.Repeat(Path.Combine(asmLocation, name), 1);
+                    }
+                }
+
+                asmLocation = typeof(DefaultPathResolver).Assembly.CodeBase;
+                if (!string.IsNullOrWhiteSpace(Path.GetDirectoryName(name)) && !string.IsNullOrWhiteSpace(asmLocation) && File.Exists(asmLocation))
+                {
+                    asmLocation = Path.GetDirectoryName(asmLocation);
+                    if (asmLocation is not null)
+                    {
+                        return Enumerable.Repeat(Path.Combine(asmLocation, name), 1);
+                    }
+                }
+            }
+            catch
+            {
+                // not supported on the WASI-SDK
+            }
+
             return Enumerable.Empty<string>();
         };
 
@@ -253,7 +300,12 @@ namespace Silk.NET.Core.Loader
                     foreach (var runtimeLib in defaultContext.RuntimeLibraries)
                         foreach (var nativeAsset in runtimeLib.GetRuntimeNativeAssets(defaultContext, rid))
                         {
+#if NETSTANDARD2_0
                             if (Path.GetFileName(nativeAsset) == name || Path.GetFileNameWithoutExtension(nativeAsset) == name)
+#else
+                            var nativeAssetSpan = nativeAsset.AsSpan();
+                            if (Path.GetFileName(nativeAssetSpan) == name || Path.GetFileNameWithoutExtension(nativeAssetSpan) == name)
+#endif
                             {
                                 appLocalNativePath = Path.Combine
                                 (

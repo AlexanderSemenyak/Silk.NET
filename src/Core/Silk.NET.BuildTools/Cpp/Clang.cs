@@ -48,12 +48,6 @@ namespace Silk.NET.BuildTools.Cpp
             "LONG_PTR"
         };
 
-        public static bool IsProbablyABitmask(Enum @enum)
-            => @enum.Tokens.Count > 1 && // there is more than one token
-               // at least approx 50% of the tokens have only one bit set
-               @enum.Tokens.Count(x => BitOperations.PopCount(ulong.Parse(x.Value[2..], NumberStyles.HexNumber)) == 1)
-               >= MathF.Floor(@enum.Tokens.Count / 2f);
-
         public static bool ShouldVisit(Cursor cursor, BindTask task, bool nullTolerant = false)
         {
             var traversals = task.ClangOpts.Traverse;
@@ -202,26 +196,55 @@ namespace Silk.NET.BuildTools.Cpp
             var destInfo = task.ClangOpts.ClassMappings[fileName];
             var indexOfOpenSqBracket = destInfo.IndexOf('[');
             var indexOfCloseSqBracket = destInfo.LastIndexOf(']');
-            var projectName = destInfo.Substring
-                (indexOfOpenSqBracket + 1, indexOfCloseSqBracket - indexOfOpenSqBracket - 1);
-            var className = destInfo.Substring(indexOfCloseSqBracket + 1);
+            var projectNameSplit = destInfo.Substring
+                (indexOfOpenSqBracket + 1, indexOfCloseSqBracket - indexOfOpenSqBracket - 1).Split(':');
+
+            if (projectNameSplit.Length == 0) 
+            {
+                throw new ArgumentException("Missing project name!");
+            }
+
+            if (projectNameSplit.Length > 2)
+            {
+                throw new ArgumentException("Too many splits in the project name!");
+            }
+
+            var projectName = projectNameSplit[0];
+
+            var nativeApiSetName = destInfo.Substring(indexOfCloseSqBracket + 1);
+            if (projectName != "Core" && projectNameSplit.Length <= 1)
+            {
+                throw new InvalidOperationException("The core class name must be provided for extension projects. Example: \"[ProjectName:CoreClassName]ExtensionClassName\"");
+            }
+            
+            var className = projectNameSplit.Length > 1
+                ? projectNameSplit[1]
+                : nativeApiSetName;
             var project = profile.Projects[projectName] = new Project
             {
                 IsRoot = projectName == "Core",
-                Namespace = projectName == "Core" ? task.Namespace : $"{task.ExtensionsNamespace}.{projectName}"
+                Namespace = projectName == "Core"
+                        ? string.Empty
+                        : $".{projectName}",
+                ComRefs = task.ClangOpts.ComRefs ?? new HashSet<string>(),
             };
 
             if (projectName != "Core")
             {
                 // we need a core project even if we're not using it
-                profile.Projects["Core"] = new() { IsRoot = true, Namespace = task.Namespace };
+                profile.Projects["Core"] = new()
+                {
+                    IsRoot = true,
+                    Namespace = task.Namespace,
+                    ComRefs = task.ClangOpts.ComRefs ?? new HashSet<string>()
+                };
             }
 
             var @class = new Class
             {
                 ClassName = className,
                 Constants = constants,
-                NativeApis = { [fileName] = new NativeApiSet { Name = "I" + className, Functions = functions } }
+                NativeApis = { [fileName] = new NativeApiSet { Name = "I" + nativeApiSetName, Functions = functions } }
             };
             project.Structs = structs;
             project.Enums = enums;
@@ -230,11 +253,14 @@ namespace Silk.NET.BuildTools.Cpp
             Console.WriteLine("Mapping C# names...");
             var variedNameMap = TypeMapper.CreateVariedNameMap(project);
             task.InjectTypeMap(variedNameMap);
+
+            bool mapNative = task.Controls.Contains("typemap-native");
+            
             foreach (var map in task.TypeMaps)
             {
-                TypeMapper.Map(map, project.Structs);
-                TypeMapper.Map(map, @class.NativeApis[fileName].Functions);
-                TypeMapper.Map(map, @class.Constants);
+                TypeMapper.Map(map, project.Structs, mapNative);
+                TypeMapper.Map(map, @class.NativeApis[fileName].Functions, mapNative);
+                TypeMapper.Map(map, @class.Constants, mapNative);
             }
 
             Console.WriteLine("Applying postprocessing...");
@@ -653,7 +679,7 @@ namespace Silk.NET.BuildTools.Cpp
                 if (type is ArrayType arrayType)
                 {
                     ret = GetType(arrayType.ElementType, out var currentCount, ref flow, out _);
-                    ret.IndirectionLevels++;
+                    ret.IndirectionLevels++; // TODO this is wrong for >2 dims!
                     var asize = arrayType.Handle.ArraySize;
                     if (asize != -1)
                     {
@@ -786,7 +812,13 @@ namespace Silk.NET.BuildTools.Cpp
                     }
                     else
                     {
-                        ret = new Type { Name = elaboratedType.NamedType.AsString };
+                        var name = elaboratedType.NamedType.AsString;
+                        if (name.LastIndexOf("::", StringComparison.Ordinal) is not -1 and var v)
+                        {
+                            name = name[(v + 2)..];
+                        }
+
+                        ret = new Type { Name = name };
                     }
                 }
                 else if (type is FunctionType functionType)
@@ -823,6 +855,11 @@ namespace Silk.NET.BuildTools.Cpp
                 }
                 else if (type is PointerType pointerType)
                 {
+                    if (pointerType.Handle.IsConstQualified || (pointerType.PointeeType.Handle.IsConstQualified && !pointerType.PointeeType.IsPointerType))
+                    {
+                        flow = FlowDirection.In;
+                    }
+
                     ret = GetType(pointerType.PointeeType, out _, ref flow, out _);
                     ret.IndirectionLevels++;
                 }
@@ -876,11 +913,14 @@ namespace Silk.NET.BuildTools.Cpp
                                 // rename the struct as we've found a typedef for it, and we haven't found a better name
                                 // already.
                                 pfns[wrapper].NativeName = typedefType.Decl.Name;
-                                var name = Naming.TranslateVariable
-                                    (Naming.TrimName(pfns[wrapper].NativeName, task), task.FunctionPrefix);
-                                if (name.ToLower().StartsWith("pfn"))
+                                if (!task.RenamedNativeNames.TryGetValue(typedefType.Decl.Name, out var name))
                                 {
-                                    name = name.Substring(3);
+                                    name = Naming.TranslateVariable
+                                        (Naming.TrimName(pfns[wrapper].NativeName, task), task.FunctionPrefix);
+                                    if (name.ToLower().StartsWith("pfn"))
+                                    {
+                                        name = name.Substring(3);
+                                    }
                                 }
 
                                 var intrinsic = pfns[wrapper].Attributes.First(x => x.Name == "BuildToolsIntrinsic");
@@ -960,8 +1000,21 @@ namespace Silk.NET.BuildTools.Cpp
                                 ? "Anonymous"
                                 : $"Anonymous{nestedRecordFieldCount}";
                             var nestedName = GetAnonymousName(nestedRecordDecl, "Record");
+                            
+                            var parent = recordDecl;
+                            var typeSuffix = "";
+                            if (string.IsNullOrWhiteSpace(recordDecl.Name))
+                            {
+                                typeSuffix = recordDecl.CursorKindSpelling.Remove(recordDecl.CursorKindSpelling.Length - 4);
+                                parent = parent.Parent as RecordDecl;
+                                while (string.IsNullOrWhiteSpace(parent.Name))
+                                {
+                                    typeSuffix = parent.CursorKindSpelling.Remove(parent.CursorKindSpelling.Length - 4) + typeSuffix;
+                                    parent = parent.Parent as RecordDecl;
+                                }
+                            }
                             var nestedNameMapped = remappedNativeName ?? Naming.TranslateVariable
-                                (Naming.TrimName(recordDecl.Name, task), task.FunctionPrefix);
+                                (Naming.TrimName(parent.Name + typeSuffix, task), task.FunctionPrefix);
                             var ret = new Field
                             {
                                 Name = Naming.TranslateLite
@@ -1161,7 +1214,7 @@ namespace Silk.NET.BuildTools.Cpp
                             EnumBaseType = GetType(enumDecl.IntegerType, out _, ref _f, out _)
                         };
 
-                        if (IsProbablyABitmask(@enum))
+                        if (@enum.IsProbablyABitmask())
                         {
                             @enum.Attributes.Add(new() { Name = "Flags" });
                         }
@@ -1204,9 +1257,17 @@ namespace Silk.NET.BuildTools.Cpp
                             }
                         }
 
-                        if (task.ExcludedNativeNames?.Contains(nativeName) ?? false)
+                        if (task.ExcludedNativeNames is not null)
                         {
-                            break;
+                            var declaration = recordDecl;
+                            while (declaration is not null && string.IsNullOrEmpty(declaration.Name))
+                                declaration = declaration.Parent as RecordDecl;
+
+                            var excludedName = declaration is null ? nativeName : declaration.Name;
+                            if (task.ExcludedNativeNames?.Contains(excludedName) ?? false)
+                            {
+                                break;
+                            }
                         }
 
                         string name = null;
@@ -1245,11 +1306,6 @@ namespace Silk.NET.BuildTools.Cpp
                             );
                         }
 
-                        if (TryGetUuid(recordDecl, out var uuid))
-                        {
-                            attrs.Add(new Attribute { Name = "Guid", Arguments = new List<string> { $"\"{uuid}\"" } });
-                        }
-
                         Struct @struct;
                         structs.Add
                         (
@@ -1260,7 +1316,8 @@ namespace Silk.NET.BuildTools.Cpp
                                 NativeName = nativeName,
                                 ClangMetadata = new[] { recordDecl.Location.ToString() },
                                 Fields = ConvertAll(recordDecl, name).ToList(),
-                                Attributes = attrs
+                                Attributes = attrs,
+                                Uuid = TryGetUuid(recordDecl, out var uuid) ? uuid : null
                             }
                         );
 
@@ -1368,7 +1425,7 @@ namespace Silk.NET.BuildTools.Cpp
                                         Arguments = new List<string>
                                         {
                                             "\"Src\"",
-                                            $"\"{functionDecl.Location}\"".Replace("\\", "\\\\").RemoveTempNames()
+                                            $"\"{functionDecl.ToNativeName()}\""
                                         }
                                     }
                                 }
@@ -1744,7 +1801,7 @@ namespace Silk.NET.BuildTools.Cpp
                     Name = name ?? Naming.TranslateLite
                         (Naming.TrimName(cxxMethodDecl.Name, task), task.FunctionPrefix),
                     NativeName = cxxMethodDecl.Name,
-                    VtblIndex = vtblIndex,
+                    VtblIndex = (int) cxxMethodDecl.VtblIndex,
                     ReturnType = GetType(cxxMethodDecl.ReturnType, out _, ref _f, out _),
                     Parameters = cxxMethodDecl.Parameters.Select
                         (

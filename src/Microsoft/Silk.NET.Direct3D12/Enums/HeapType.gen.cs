@@ -9,12 +9,9 @@ using Silk.NET.Core.Attributes;
 
 namespace Silk.NET.Direct3D12
 {
-    [Flags]
     [NativeName("Name", "D3D12_HEAP_TYPE")]
     public enum HeapType : int
     {
-        [NativeName("Name", "")]
-        None = 0,
         [Obsolete("Deprecated in favour of \"Default\"")]
         [NativeName("Name", "D3D12_HEAP_TYPE_DEFAULT")]
         HeapTypeDefault = 0x1,
@@ -27,6 +24,9 @@ namespace Silk.NET.Direct3D12
         [Obsolete("Deprecated in favour of \"Custom\"")]
         [NativeName("Name", "D3D12_HEAP_TYPE_CUSTOM")]
         HeapTypeCustom = 0x4,
+        [Obsolete("Deprecated in favour of \"GpuUpload\"")]
+        [NativeName("Name", "D3D12_HEAP_TYPE_GPU_UPLOAD")]
+        HeapTypeGpuUpload = 0x5,
         [NativeName("Name", "D3D12_HEAP_TYPE_DEFAULT")]
         Default = 0x1,
         [NativeName("Name", "D3D12_HEAP_TYPE_UPLOAD")]
@@ -35,5 +35,7 @@ namespace Silk.NET.Direct3D12
         Readback = 0x3,
         [NativeName("Name", "D3D12_HEAP_TYPE_CUSTOM")]
         Custom = 0x4,
+        [NativeName("Name", "D3D12_HEAP_TYPE_GPU_UPLOAD")]
+        GpuUpload = 0x5,
     }
 }

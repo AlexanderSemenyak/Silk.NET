@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -7,12 +8,12 @@ namespace Silk.NET.BuildTools.Converters.Khronos
 {
     public class VulkanSpecification
     {
-        public CommandDefinition[] Commands { get; }
+        public CommandDefinition[] Commands { get; private set;  }
         public ConstantDefinition[] Constants { get; }
         public TypedefDefinition[] Typedefs { get; }
-        public EnumDefinition[] Enums { get; }
-        public StructureDefinition[] Structures { get; }
-        public StructureDefinition[] Unions{ get; }
+        public EnumDefinition[] Enums { get; private set; }
+        public StructureDefinition[] Structures { get; private set; }
+        public StructureDefinition[] Unions { get; private set; }
         public HandleDefinition[] Handles { get; }
         public Dictionary<string, string> BaseTypes { get; }
         public ExtensionDefinition[] Extensions { get; }
@@ -48,18 +49,37 @@ namespace Silk.NET.BuildTools.Converters.Khronos
             Enums = enums.ToArray();
         }
 
+        static long? ParseLong(string token)
+        {
+            return token.StartsWith("0x")
+                ? long.TryParse(token[2..], NumberStyles.HexNumber, null, out var result) ? result : null
+                : long.TryParse(token, out var result2)
+                    ? result2
+                    : null;
+        }
+        
         public static VulkanSpecification LoadFromXmlStream(Stream specFileStream)
         {
             var spec = XDocument.Load(specFileStream);
             var registry = spec.Element("registry");
-            var commands = registry.Element("commands");
-            var commandDefinitions = commands.Elements("command")
+            var commandDefinitions = registry.Elements("commands").Elements("command")
                 .Select(commandx => CommandDefinition.CreateFromXml(commandx)).ToArray();
 
             var constantDefinitions = registry.Elements("enums")
                 .Where(enumx => enumx.Attribute("name").Value == "API Constants")
                 .SelectMany(enumx => enumx.Elements("enum"))
-                .Select(enumxx => ConstantDefinition.CreateFromXml(enumxx)).ToArray();
+                .Select(enumxx => ConstantDefinition.CreateFromXml(enumxx))
+                .Concat(
+                    registry.Elements("types")
+                        .Elements("type") 
+                        .Where(x => x.HasCategoryAttribute("define"))
+                        .Select(x => x.Element("name")?.Value is { Length: > 0 } nm &&
+                            ParseLong(x.Value.Replace("#define", "").Replace(nm, "").Trim()) is {} val
+                                ? new ConstantDefinition(nm, val.ToString(), "", null)
+                                : null
+                        )
+                        .OfType<ConstantDefinition>()
+                 ).ToArray();
 
             var types = registry.Elements("types");
             var typedefDefinitions = types.Elements("type").Where(xe => xe.Value.Contains("typedef") && xe.HasCategoryAttribute("bitmask"))
@@ -103,6 +123,17 @@ namespace Silk.NET.BuildTools.Converters.Khronos
 
             var features = registry.Elements("feature")
                 .Select(FeatureDefinition.CreateFromXml)
+                .SelectMany
+                (
+                    x => x.Api.Split(',')
+                        .Select
+                        (
+                            y => new FeatureDefinition
+                            (
+                                x.Name, x.Number, y, x.EnumNames, x.CommandNames, x.TypeNames, x.EnumExtensions
+                            )
+                        )
+                )
                 .ToArray();
 
             return new VulkanSpecification(
@@ -131,7 +162,10 @@ namespace Silk.NET.BuildTools.Converters.Khronos
                 {
                     var enumDef = GetEnumDef(enums, enumEx.ExtendedType);
                     var value = long.Parse(enumEx.Value);
-                    enumDef.Values = enumDef.Values.Append(new EnumValue(enumEx.Name, value, null)).ToArray();
+                    foreach (var api in enumDef.Api?.Split(',') ?? exDef.Supported)
+                    {
+                        enumDef.Values = enumDef.Values.Append(new EnumValue(enumEx.Name, value, null, api)).ToArray();
+                    }
                 }
             }
         }
@@ -144,7 +178,7 @@ namespace Silk.NET.BuildTools.Converters.Khronos
                 {
                     var enumDef = GetEnumDef(enums, enumEx.ExtendedType);
                     var value = long.Parse(enumEx.Value);
-                    enumDef.Values = enumDef.Values.Append(new EnumValue(enumEx.Name, value, null)).ToArray();
+                    enumDef.Values = enumDef.Values.Append(new EnumValue(enumEx.Name, value, null, exDef.Api)).ToArray();
                 }
             }
         }
@@ -184,6 +218,117 @@ namespace Silk.NET.BuildTools.Converters.Khronos
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// Specialises "partially specialised" functions and structures i.e. functions/structures that do not have an
+        /// api-specific attribute present, but whose parameters/fields have api-specific attributes. Basically, this
+        /// duplicates each function/structure but with only the relevant attributes included as if they were wholly
+        /// redefined for both APIs.
+        /// </summary>
+        public void Specialise()
+        {
+            var allApis = Commands.SelectMany
+            (
+                x => (x.Api?.Split(',') ?? Enumerable.Empty<string>())
+                    .Concat(x.Parameters.SelectMany(y => y.Api?.Split(',') ?? Enumerable.Empty<string>()))
+            )
+            .Concat
+            (
+                Structures.SelectMany
+                (
+                    x => (x.Api?.Split(',') ?? Enumerable.Empty<string>())
+                        .Concat(x.Members.SelectMany(y => y.Api?.Split(',') ?? Enumerable.Empty<string>()))
+                )
+            )
+            .Concat
+            (
+                Unions.SelectMany
+                (
+                    x => (x.Api?.Split(',') ?? Enumerable.Empty<string>())
+                        .Concat(x.Members.SelectMany(y => y.Api?.Split(',') ?? Enumerable.Empty<string>()))
+                )
+            )
+            .Concat
+            (
+                Enums.SelectMany
+                (
+                    x => (x.Api?.Split(',') ?? Enumerable.Empty<string>())
+                        .Concat(x.Values.SelectMany(y => y.Api?.Split(',') ?? Enumerable.Empty<string>()))
+                )
+            )
+            .Concat(Features.SelectMany(x => x.Api.Split(',')))
+            .Concat(Extensions.SelectMany(x => x.Supported))
+            .Distinct()
+            .ToArray();
+            Commands = Commands.SelectMany
+            (
+                x => x.Api is null && x.Parameters.Any(y => y.Api is not null)
+                    ? allApis.Select
+                      (
+                          y => new CommandDefinition
+                          (
+                              x.Name, x.ReturnType,
+                              x.Parameters.Where
+                              (
+                                  z => z.Api is null || z.Api == y || y is not null && z.Api.Split(',').Contains(y)
+                              ).ToArray(),
+                              x.SuccessCodes, x.ErrorCodes, y
+                          )
+                      )
+                    : Enumerable.Repeat(x, 1)
+            ).ToArray();
+            Structures = Structures.SelectMany
+            (
+                x => x.Api is null && x.Members.Any(y => y.Api is not null)
+                    ? allApis.Select
+                      (
+                          y => new StructureDefinition
+                          (
+                              x.Name, x.Alias,
+                              x.Members.Where
+                              (
+                                  z => z.Api is null || z.Api == y || y is not null && z.Api.Split(',').Contains(y)
+                              ).ToArray(),
+                              string.Join(',', x.Extends), y
+                          )
+                      )
+                    : Enumerable.Repeat(x, 1)
+            ).ToArray();
+            Unions = Unions.SelectMany
+            (
+                x => x.Api is null && x.Members.Any(y => y.Api is not null)
+                    ? allApis.Select
+                      (
+                          y => new StructureDefinition
+                          (
+                              x.Name, x.Alias,
+                              x.Members.Where
+                              (
+                                  z => z.Api is null || z.Api == y || y is not null && z.Api.Split(',').Contains(y)
+                              ).ToArray(),
+                              string.Join(',', x.Extends), y
+                          )
+                      )
+                    : Enumerable.Repeat(x, 1)
+            ).ToArray();
+            Enums = Enums.SelectMany
+            (
+                x => x.Api is null && x.Values.Any(y => y.Api is not null)
+                    ? allApis.Select
+                      (
+                          y => new EnumDefinition
+                          (
+                              x.Name, x.Type,
+                              x.Values.Where
+                              (
+                                  z => z.Api is null || z.Api == y || y is not null && z.Api.Split(',').Contains(y)
+                              ).ToArray(),
+                              x.BitWidth, y
+                          )
+                      )
+                    : Enumerable.Repeat(x, 1)
+            ).ToArray();
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Silk.NET.Core;
 using Silk.NET.Core.Contexts;
+using Silk.NET.Core.Native;
 using Silk.NET.Maths;
 using Silk.NET.SDL;
 using Point = System.Drawing.Point;
@@ -120,6 +121,7 @@ namespace Silk.NET.Windowing.Sdl
                 : _extendedOptionsCache.WindowState;
             set
             {
+                _swapIntervalChanged = true;
                 _extendedOptionsCache.WindowState = value;
                 if (!IsInitialized)
                 {
@@ -210,6 +212,16 @@ namespace Silk.NET.Windowing.Sdl
         }
 
         public bool TransparentFramebuffer => false; // doesn't look like SDL doesn't support this
+        
+        public bool TopMost
+        {
+            get => _extendedOptionsCache.TopMost;
+            set
+            {
+                Sdl.SetWindowAlwaysOnTop(SdlWindow, value ? SdlBool.True : SdlBool.False);
+                _extendedOptionsCache.TopMost = value;
+            }
+        }
 
         public IGLContext? SharedContext => _extendedOptionsCache.SharedContext;
 
@@ -258,6 +270,7 @@ namespace Silk.NET.Windowing.Sdl
             }
             set
             {
+                _swapIntervalChanged = true;
                 if (!IsInitialized)
                 {
                     throw new InvalidOperationException("Window is not initialized.");
@@ -392,7 +405,8 @@ namespace Silk.NET.Windowing.Sdl
                     }
                     case EventType.Dropfile:
                     {
-                        _droppedFiles.Add(new string((sbyte*) @event.Drop.File));
+                        string path = SilkMarshal.PtrToString((nint) @event.Drop.File, NativeStringEncoding.UTF8) ?? "";
+                        _droppedFiles.Add(path);
                         break;
                     }
                     default:
@@ -405,7 +419,7 @@ namespace Silk.NET.Windowing.Sdl
 
                 if (!skipped)
                 {
-                    Events.RemoveAt(i);
+                    RemoveEvent(i);
                 }
             }
 
@@ -418,6 +432,7 @@ namespace Silk.NET.Windowing.Sdl
 
         protected override void CoreInitialize(ViewOptions opts)
         {
+            _swapIntervalChanged = true;
             Sdl.Setenv("SDL_VIDEO_X11_WMCLASS", WindowClass, 1);
 
             WindowFlags flags = 0;
@@ -439,8 +454,8 @@ namespace Silk.NET.Windowing.Sdl
             };
             CoreInitialize
             (
-                opts, flags, InitialMonitor?.Bounds.Origin.X + Position.X,
-                InitialMonitor?.Bounds.Origin.Y + Position.Y, Size.X, Size.Y, Title, SharedContext
+                opts, flags, (InitialMonitor?.Bounds.Origin.X ?? 0) + _extendedOptionsCache.Position.X,
+                (InitialMonitor?.Bounds.Origin.Y ?? 0) + _extendedOptionsCache.Position.Y, Size.X, Size.Y, Title, SharedContext
             );
         }
     }

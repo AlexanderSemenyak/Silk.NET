@@ -18,6 +18,9 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"StorableFB\"")]
         [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_STORABLE_FB")]
         SpaceComponentTypeStorableFB = 1,
+        [Obsolete("Deprecated in favour of \"SharableFB\"")]
+        [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_SHARABLE_FB")]
+        SpaceComponentTypeSharableFB = 2,
         [Obsolete("Deprecated in favour of \"Bounded2DFB\"")]
         [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_BOUNDED_2D_FB")]
         SpaceComponentTypeBounded2DFB = 3,
@@ -33,10 +36,15 @@ namespace Silk.NET.OpenXR
         [Obsolete("Deprecated in favour of \"SpaceContainerFB\"")]
         [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_SPACE_CONTAINER_FB")]
         SpaceComponentTypeSpaceContainerFB = 7,
+        [Obsolete("Deprecated in favour of \"TriangleMeshMeta\"")]
+        [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_TRIANGLE_MESH_META")]
+        SpaceComponentTypeTriangleMeshMeta = 1000269000,
         [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_LOCATABLE_FB")]
         LocatableFB = 0,
         [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_STORABLE_FB")]
         StorableFB = 1,
+        [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_SHARABLE_FB")]
+        SharableFB = 2,
         [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_BOUNDED_2D_FB")]
         Bounded2DFB = 3,
         [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_BOUNDED_3D_FB")]
@@ -47,5 +55,7 @@ namespace Silk.NET.OpenXR
         RoomLayoutFB = 6,
         [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_SPACE_CONTAINER_FB")]
         SpaceContainerFB = 7,
+        [NativeName("Name", "XR_SPACE_COMPONENT_TYPE_TRIANGLE_MESH_META")]
+        TriangleMeshMeta = 1000269000,
     }
 }

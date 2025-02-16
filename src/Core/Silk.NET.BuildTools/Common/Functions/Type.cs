@@ -103,6 +103,12 @@ namespace Silk.NET.BuildTools.Common.Functions
         public bool IsThis { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this is a pointer that is actually an integer and not a pointer to a
+        /// memory location.
+        /// </summary>
+        public bool IsIntAsPtr { get; set; }
+
+        /// <summary>
         /// Gets or sets the function pointer signature if this type is a function pointer. May be null.
         /// </summary>
         public Function FunctionPointerSignature { get; set; }
@@ -118,7 +124,7 @@ namespace Silk.NET.BuildTools.Common.Functions
         public string ToString(bool allowFunctionPointers)
         {
             return (IsThis ? "this " : string.Empty) +
-                   (IsIn ? "in " : string.Empty) +
+                   (IsIn ? "[RequiresLocation] in " : string.Empty) +
                    (IsOut ? "out " : string.Empty) +
                    (IsByRef ? "ref " : string.Empty) +
                    (IsFunctionPointer && allowFunctionPointers && Name == "void"
@@ -128,6 +134,15 @@ namespace Silk.NET.BuildTools.Common.Functions
                    (IsArray ? Utilities.GetArrayDimensionString(ArrayDimensions) : string.Empty) +
                    (GenericTypes.Any() ? $"<{string.Join(", ", GenericTypes.Select(x => x.Name))}>" : string.Empty);
         }
+
+        /// <summary>
+        /// Determines whether this type represents a single-level pointer to the given type name.
+        /// </summary>
+        /// <param name="name">The type name.</param>
+        /// <returns>Whether it's a single-level pointer.</returns>
+        public bool IsSinglePointerTo(string name)
+            => Name == name && IndirectionLevels == 1 && !IsIn && !IsOut && !IsByRef &&
+               !IsFunctionPointer && !IsArray && GenericTypes.Count == 0;
 
         /// <summary>
         /// Returns a value indicating whether this signature represents a void pointer.
@@ -141,21 +156,6 @@ namespace Silk.NET.BuildTools.Common.Functions
                        StringComparison.OrdinalIgnoreCase
                    )
                    && IsPointer;
-        }
-
-        /// <summary>
-        /// Returns a value indicating whether this signature represents a void pointer.
-        /// </summary>
-        /// <returns>A value indicating whether this signature represents a void pointer.</returns>
-        public bool IsSingleVoidPointer()
-        {
-            return ToString() == "void*";
-            //return Name.Equals
-            //       (
-            //           typeof(void).Name.ToLowerInvariant(),
-            //           StringComparison.OrdinalIgnoreCase
-            //       )
-            //       && IsPointer;
         }
 
         /// <summary>

@@ -24,18 +24,6 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"CreateDerivativeBit\"")]
         [NativeName("Name", "VK_PIPELINE_CREATE_DERIVATIVE_BIT")]
         PipelineCreateDerivativeBit = 4,
-        [Obsolete("Deprecated in favour of \"CreateRenderingFragmentShadingRateAttachmentBitKhr\"")]
-        [NativeName("Name", "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
-        PipelineCreateRenderingFragmentShadingRateAttachmentBitKhr = 2097152,
-        [Obsolete("Deprecated in favour of \"RasterizationStateCreateFragmentShadingRateAttachmentBitKhr\"")]
-        [NativeName("Name", "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
-        PipelineRasterizationStateCreateFragmentShadingRateAttachmentBitKhr = 2097152,
-        [Obsolete("Deprecated in favour of \"CreateRenderingFragmentDensityMapAttachmentBitExt\"")]
-        [NativeName("Name", "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")]
-        PipelineCreateRenderingFragmentDensityMapAttachmentBitExt = 4194304,
-        [Obsolete("Deprecated in favour of \"RasterizationStateCreateFragmentDensityMapAttachmentBitExt\"")]
-        [NativeName("Name", "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")]
-        PipelineRasterizationStateCreateFragmentDensityMapAttachmentBitExt = 4194304,
         [Obsolete("Deprecated in favour of \"CreateViewIndexFromDeviceIndexBitKhr\"")]
         [NativeName("Name", "VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR")]
         PipelineCreateViewIndexFromDeviceIndexBitKhr = 8,
@@ -66,6 +54,18 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"CreateDeferCompileBitNV\"")]
         [NativeName("Name", "VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV")]
         PipelineCreateDeferCompileBitNV = 32,
+        [Obsolete("Deprecated in favour of \"CreateRenderingFragmentDensityMapAttachmentBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")]
+        PipelineCreateRenderingFragmentDensityMapAttachmentBitExt = 4194304,
+        [Obsolete("Deprecated in favour of \"RasterizationStateCreateFragmentDensityMapAttachmentBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")]
+        PipelineRasterizationStateCreateFragmentDensityMapAttachmentBitExt = 4194304,
+        [Obsolete("Deprecated in favour of \"CreateRenderingFragmentShadingRateAttachmentBitKhr\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
+        PipelineCreateRenderingFragmentShadingRateAttachmentBitKhr = 2097152,
+        [Obsolete("Deprecated in favour of \"RasterizationStateCreateFragmentShadingRateAttachmentBitKhr\"")]
+        [NativeName("Name", "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
+        PipelineRasterizationStateCreateFragmentShadingRateAttachmentBitKhr = 2097152,
         [Obsolete("Deprecated in favour of \"CreateCaptureStatisticsBitKhr\"")]
         [NativeName("Name", "VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR")]
         PipelineCreateCaptureStatisticsBitKhr = 64,
@@ -84,6 +84,9 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"CreateEarlyReturnOnFailureBitExt\"")]
         [NativeName("Name", "VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT")]
         PipelineCreateEarlyReturnOnFailureBitExt = 512,
+        [Obsolete("Deprecated in favour of \"CreateDescriptorBufferBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT")]
+        PipelineCreateDescriptorBufferBitExt = 536870912,
         [Obsolete("Deprecated in favour of \"CreateRetainLinkTimeOptimizationInfoBitExt\"")]
         [NativeName("Name", "VK_PIPELINE_CREATE_RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT")]
         PipelineCreateRetainLinkTimeOptimizationInfoBitExt = 8388608,
@@ -93,18 +96,24 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"CreateRayTracingAllowMotionBitNV\"")]
         [NativeName("Name", "VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV")]
         PipelineCreateRayTracingAllowMotionBitNV = 1048576,
-        [Obsolete("Deprecated in favour of \"CreateReserved25BitExt\"")]
-        [NativeName("Name", "VK_PIPELINE_CREATE_RESERVED_25_BIT_EXT")]
-        PipelineCreateReserved25BitExt = 33554432,
-        [Obsolete("Deprecated in favour of \"CreateReserved26BitExt\"")]
-        [NativeName("Name", "VK_PIPELINE_CREATE_RESERVED_26_BIT_EXT")]
-        PipelineCreateReserved26BitExt = 67108864,
-        [Obsolete("Deprecated in favour of \"CreateReserved24BitNV\"")]
-        [NativeName("Name", "VK_PIPELINE_CREATE_RESERVED_24_BIT_NV")]
-        PipelineCreateReserved24BitNV = 16777216,
-        [Obsolete("Deprecated in favour of \"CreateReserved27BitExt\"")]
-        [NativeName("Name", "VK_PIPELINE_CREATE_RESERVED_27_BIT_EXT")]
-        PipelineCreateReserved27BitExt = 134217728,
+        [Obsolete("Deprecated in favour of \"CreateColorAttachmentFeedbackLoopBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT")]
+        PipelineCreateColorAttachmentFeedbackLoopBitExt = 33554432,
+        [Obsolete("Deprecated in favour of \"CreateDepthStencilAttachmentFeedbackLoopBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT")]
+        PipelineCreateDepthStencilAttachmentFeedbackLoopBitExt = 67108864,
+        [Obsolete("Deprecated in favour of \"CreateRayTracingOpacityMicromapBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT")]
+        PipelineCreateRayTracingOpacityMicromapBitExt = 16777216,
+        [Obsolete("Deprecated in favour of \"CreateRayTracingDisplacementMicromapBitNV\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV")]
+        PipelineCreateRayTracingDisplacementMicromapBitNV = 268435456,
+        [Obsolete("Deprecated in favour of \"CreateNoProtectedAccessBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT_EXT")]
+        PipelineCreateNoProtectedAccessBitExt = 134217728,
+        [Obsolete("Deprecated in favour of \"CreateProtectedAccessOnlyBitExt\"")]
+        [NativeName("Name", "VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT_EXT")]
+        PipelineCreateProtectedAccessOnlyBitExt = 1073741824,
         [Obsolete("Deprecated in favour of \"CreateViewIndexFromDeviceIndexBit\"")]
         [NativeName("Name", "VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT")]
         PipelineCreateViewIndexFromDeviceIndexBit = 8,
@@ -126,14 +135,6 @@ namespace Silk.NET.Vulkan
         CreateAllowDerivativesBit = 2,
         [NativeName("Name", "VK_PIPELINE_CREATE_DERIVATIVE_BIT")]
         CreateDerivativeBit = 4,
-        [NativeName("Name", "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
-        CreateRenderingFragmentShadingRateAttachmentBitKhr = 2097152,
-        [NativeName("Name", "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
-        RasterizationStateCreateFragmentShadingRateAttachmentBitKhr = 2097152,
-        [NativeName("Name", "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")]
-        CreateRenderingFragmentDensityMapAttachmentBitExt = 4194304,
-        [NativeName("Name", "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")]
-        RasterizationStateCreateFragmentDensityMapAttachmentBitExt = 4194304,
         [NativeName("Name", "VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR")]
         CreateViewIndexFromDeviceIndexBitKhr = 8,
         [NativeName("Name", "VK_PIPELINE_CREATE_DISPATCH_BASE_KHR")]
@@ -154,6 +155,14 @@ namespace Silk.NET.Vulkan
         CreateRayTracingShaderGroupHandleCaptureReplayBitKhr = 524288,
         [NativeName("Name", "VK_PIPELINE_CREATE_DEFER_COMPILE_BIT_NV")]
         CreateDeferCompileBitNV = 32,
+        [NativeName("Name", "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")]
+        CreateRenderingFragmentDensityMapAttachmentBitExt = 4194304,
+        [NativeName("Name", "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT")]
+        RasterizationStateCreateFragmentDensityMapAttachmentBitExt = 4194304,
+        [NativeName("Name", "VK_PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
+        CreateRenderingFragmentShadingRateAttachmentBitKhr = 2097152,
+        [NativeName("Name", "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR")]
+        RasterizationStateCreateFragmentShadingRateAttachmentBitKhr = 2097152,
         [NativeName("Name", "VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR")]
         CreateCaptureStatisticsBitKhr = 64,
         [NativeName("Name", "VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR")]
@@ -166,20 +175,26 @@ namespace Silk.NET.Vulkan
         CreateFailOnPipelineCompileRequiredBitExt = 256,
         [NativeName("Name", "VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT")]
         CreateEarlyReturnOnFailureBitExt = 512,
+        [NativeName("Name", "VK_PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT")]
+        CreateDescriptorBufferBitExt = 536870912,
         [NativeName("Name", "VK_PIPELINE_CREATE_RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT")]
         CreateRetainLinkTimeOptimizationInfoBitExt = 8388608,
         [NativeName("Name", "VK_PIPELINE_CREATE_LINK_TIME_OPTIMIZATION_BIT_EXT")]
         CreateLinkTimeOptimizationBitExt = 1024,
         [NativeName("Name", "VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV")]
         CreateRayTracingAllowMotionBitNV = 1048576,
-        [NativeName("Name", "VK_PIPELINE_CREATE_RESERVED_25_BIT_EXT")]
-        CreateReserved25BitExt = 33554432,
-        [NativeName("Name", "VK_PIPELINE_CREATE_RESERVED_26_BIT_EXT")]
-        CreateReserved26BitExt = 67108864,
-        [NativeName("Name", "VK_PIPELINE_CREATE_RESERVED_24_BIT_NV")]
-        CreateReserved24BitNV = 16777216,
-        [NativeName("Name", "VK_PIPELINE_CREATE_RESERVED_27_BIT_EXT")]
-        CreateReserved27BitExt = 134217728,
+        [NativeName("Name", "VK_PIPELINE_CREATE_COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT")]
+        CreateColorAttachmentFeedbackLoopBitExt = 33554432,
+        [NativeName("Name", "VK_PIPELINE_CREATE_DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT")]
+        CreateDepthStencilAttachmentFeedbackLoopBitExt = 67108864,
+        [NativeName("Name", "VK_PIPELINE_CREATE_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT")]
+        CreateRayTracingOpacityMicromapBitExt = 16777216,
+        [NativeName("Name", "VK_PIPELINE_CREATE_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV")]
+        CreateRayTracingDisplacementMicromapBitNV = 268435456,
+        [NativeName("Name", "VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT_EXT")]
+        CreateNoProtectedAccessBitExt = 134217728,
+        [NativeName("Name", "VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT_EXT")]
+        CreateProtectedAccessOnlyBitExt = 1073741824,
         [NativeName("Name", "VK_PIPELINE_CREATE_VIEW_INDEX_FROM_DEVICE_INDEX_BIT")]
         CreateViewIndexFromDeviceIndexBit = 8,
         [NativeName("Name", "VK_PIPELINE_CREATE_DISPATCH_BASE_BIT")]

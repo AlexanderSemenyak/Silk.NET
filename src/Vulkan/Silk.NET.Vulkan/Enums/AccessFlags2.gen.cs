@@ -169,6 +169,12 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"CommandPreprocessWriteBitNV\"")]
         [NativeName("Name", "VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV")]
         Access2CommandPreprocessWriteBitNV = 262144,
+        [Obsolete("Deprecated in favour of \"CommandPreprocessReadBitExt\"")]
+        [NativeName("Name", "VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_EXT")]
+        Access2CommandPreprocessReadBitExt = 131072,
+        [Obsolete("Deprecated in favour of \"CommandPreprocessWriteBitExt\"")]
+        [NativeName("Name", "VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_EXT")]
+        Access2CommandPreprocessWriteBitExt = 262144,
         [Obsolete("Deprecated in favour of \"FragmentShadingRateAttachmentReadBitKhr\"")]
         [NativeName("Name", "VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR")]
         Access2FragmentShadingRateAttachmentReadBitKhr = 8388608,
@@ -193,27 +199,27 @@ namespace Silk.NET.Vulkan
         [Obsolete("Deprecated in favour of \"ColorAttachmentReadNoncoherentBitExt\"")]
         [NativeName("Name", "VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT")]
         Access2ColorAttachmentReadNoncoherentBitExt = 524288,
-        [Obsolete("Deprecated in favour of \"Reserved41BitAmd\"")]
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_41_BIT_AMD")]
-        Access2Reserved41BitAmd = 2199023255552,
+        [Obsolete("Deprecated in favour of \"DescriptorBufferReadBitExt\"")]
+        [NativeName("Name", "VK_ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT")]
+        Access2DescriptorBufferReadBitExt = 2199023255552,
         [Obsolete("Deprecated in favour of \"InvocationMaskReadBitHuawei\"")]
         [NativeName("Name", "VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI")]
         Access2InvocationMaskReadBitHuawei = 549755813888,
         [Obsolete("Deprecated in favour of \"ShaderBindingTableReadBitKhr\"")]
         [NativeName("Name", "VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR")]
         Access2ShaderBindingTableReadBitKhr = 1099511627776,
-        [Obsolete("Deprecated in favour of \"Reserved44BitNV\"")]
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_44_BIT_NV")]
-        Access2Reserved44BitNV = 17592186044416,
-        [Obsolete("Deprecated in favour of \"Reserved45BitNV\"")]
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_45_BIT_NV")]
-        Access2Reserved45BitNV = 35184372088832,
-        [Obsolete("Deprecated in favour of \"Reserved42BitNV\"")]
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_42_BIT_NV")]
-        Access2Reserved42BitNV = 4398046511104,
-        [Obsolete("Deprecated in favour of \"Reserved43BitNV\"")]
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_43_BIT_NV")]
-        Access2Reserved43BitNV = 8796093022208,
+        [Obsolete("Deprecated in favour of \"MicromapReadBitExt\"")]
+        [NativeName("Name", "VK_ACCESS_2_MICROMAP_READ_BIT_EXT")]
+        Access2MicromapReadBitExt = 17592186044416,
+        [Obsolete("Deprecated in favour of \"MicromapWriteBitExt\"")]
+        [NativeName("Name", "VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT")]
+        Access2MicromapWriteBitExt = 35184372088832,
+        [Obsolete("Deprecated in favour of \"OpticalFlowReadBitNV\"")]
+        [NativeName("Name", "VK_ACCESS_2_OPTICAL_FLOW_READ_BIT_NV")]
+        Access2OpticalFlowReadBitNV = 4398046511104,
+        [Obsolete("Deprecated in favour of \"OpticalFlowWriteBitNV\"")]
+        [NativeName("Name", "VK_ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV")]
+        Access2OpticalFlowWriteBitNV = 8796093022208,
         [NativeName("Name", "VK_ACCESS_2_NONE")]
         None = 0,
         [NativeName("Name", "VK_ACCESS_2_NONE_KHR")]
@@ -318,6 +324,10 @@ namespace Silk.NET.Vulkan
         CommandPreprocessReadBitNV = 131072,
         [NativeName("Name", "VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV")]
         CommandPreprocessWriteBitNV = 262144,
+        [NativeName("Name", "VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_EXT")]
+        CommandPreprocessReadBitExt = 131072,
+        [NativeName("Name", "VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_EXT")]
+        CommandPreprocessWriteBitExt = 262144,
         [NativeName("Name", "VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR")]
         FragmentShadingRateAttachmentReadBitKhr = 8388608,
         [NativeName("Name", "VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV")]
@@ -334,19 +344,19 @@ namespace Silk.NET.Vulkan
         FragmentDensityMapReadBitExt = 16777216,
         [NativeName("Name", "VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT")]
         ColorAttachmentReadNoncoherentBitExt = 524288,
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_41_BIT_AMD")]
-        Reserved41BitAmd = 2199023255552,
+        [NativeName("Name", "VK_ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT")]
+        DescriptorBufferReadBitExt = 2199023255552,
         [NativeName("Name", "VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI")]
         InvocationMaskReadBitHuawei = 549755813888,
         [NativeName("Name", "VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR")]
         ShaderBindingTableReadBitKhr = 1099511627776,
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_44_BIT_NV")]
-        Reserved44BitNV = 17592186044416,
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_45_BIT_NV")]
-        Reserved45BitNV = 35184372088832,
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_42_BIT_NV")]
-        Reserved42BitNV = 4398046511104,
-        [NativeName("Name", "VK_ACCESS_2_RESERVED_43_BIT_NV")]
-        Reserved43BitNV = 8796093022208,
+        [NativeName("Name", "VK_ACCESS_2_MICROMAP_READ_BIT_EXT")]
+        MicromapReadBitExt = 17592186044416,
+        [NativeName("Name", "VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT")]
+        MicromapWriteBitExt = 35184372088832,
+        [NativeName("Name", "VK_ACCESS_2_OPTICAL_FLOW_READ_BIT_NV")]
+        OpticalFlowReadBitNV = 4398046511104,
+        [NativeName("Name", "VK_ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV")]
+        OpticalFlowWriteBitNV = 8796093022208,
     }
 }

@@ -6,9 +6,33 @@
     "build": {
       "type": "object",
       "properties": {
+        "AkvCertificate": {
+          "type": "string",
+          "description": "Code-signing service Azure Key Vault certificate"
+        },
+        "AkvClientId": {
+          "type": "string",
+          "description": "Code-signing service Azure Key Vault client ID"
+        },
+        "AkvClientSecret": {
+          "type": "string",
+          "description": "Code-signing service Azure Key Vault client secret"
+        },
+        "AkvTenant": {
+          "type": "string",
+          "description": "Code-signing service Azure Key Vault tenant ID"
+        },
+        "AkvVaultUrl": {
+          "type": "string",
+          "description": "Code-signing service Azure Key Vault URL"
+        },
         "All": {
           "type": "boolean",
           "description": "If specified, ignores any generated solution present and builds the entire project"
+        },
+        "AndroidHomeValue": {
+          "type": "string",
+          "description": "Android home. Will be determined from dotnet if not provided"
         },
         "Configuration": {
           "type": "string",
@@ -17,6 +41,10 @@
         "Continue": {
           "type": "boolean",
           "description": "Indicates to continue a previously failed build attempt"
+        },
+        "CreateBindingsPr": {
+          "type": "boolean",
+          "description": "Create a PR after bindings regeneration completes"
         },
         "Help": {
           "type": "boolean",
@@ -43,6 +71,10 @@
             "VSCode"
           ]
         },
+        "MatrixArg": {
+          "type": "string",
+          "description": "Matrix job argument e.g. a RID for native builds"
+        },
         "MsbuildProperties": {
           "type": "array",
           "description": "Extra properties passed to MSBuild commands",
@@ -57,6 +89,10 @@
         "NoLogo": {
           "type": "boolean",
           "description": "Disables displaying the NUKE logo"
+        },
+        "NoParallelGeneration": {
+          "type": "boolean",
+          "description": "Don't let BuildTools parallelize"
         },
         "NugetApiKey": {
           "type": "string",
@@ -104,17 +140,20 @@
             "type": "string"
           }
         },
+        "PullBaseSite": {
+          "type": "boolean",
+          "description": "When enabled, pulls the latest changes for local clone of the 3.0 branch to build the website. Automatically true if the local clone doesn't exist yet"
+        },
         "Root": {
           "type": "string",
           "description": "Root directory during build execution"
         },
-        "SignPassword": {
-          "type": "string",
-          "description": "Code-signing service password"
-        },
-        "SignUsername": {
-          "type": "string",
-          "description": "Code-signing service username"
+        "SiteBuildArgs": {
+          "type": "array",
+          "description": "Arguments for website generation on the 3.0 branch",
+          "items": {
+            "type": "string"
+          }
         },
         "Skip": {
           "type": "array",
@@ -128,23 +167,33 @@
               "Clean",
               "Compile",
               "DeclareApi",
+              "Dxvk",
               "EnsureApiDeclared",
               "FullCompile",
               "FullPack",
               "FullPushToNuGet",
               "GLFW",
+              "MoltenVK",
+              "OpenALSoft",
               "Pack",
               "Prerequisites",
               "PushToNuGet",
               "RegenerateBindings",
               "Restore",
+              "SDL2",
+              "Shaderc",
               "ShipApi",
               "SignPackages",
               "Sln",
+              "SPIRVCross",
+              "SPIRVReflect",
               "SwiftShader",
               "Test",
               "ValidateSolution",
-              "VulkanLoader"
+              "Vkd3d",
+              "VulkanLoader",
+              "Website",
+              "Wgpu"
             ]
           }
         },
@@ -164,23 +213,33 @@
               "Clean",
               "Compile",
               "DeclareApi",
+              "Dxvk",
               "EnsureApiDeclared",
               "FullCompile",
               "FullPack",
               "FullPushToNuGet",
               "GLFW",
+              "MoltenVK",
+              "OpenALSoft",
               "Pack",
               "Prerequisites",
               "PushToNuGet",
               "RegenerateBindings",
               "Restore",
+              "SDL2",
+              "Shaderc",
               "ShipApi",
               "SignPackages",
               "Sln",
+              "SPIRVCross",
+              "SPIRVReflect",
               "SwiftShader",
               "Test",
               "ValidateSolution",
-              "VulkanLoader"
+              "Vkd3d",
+              "VulkanLoader",
+              "Website",
+              "Wgpu"
             ]
           }
         },

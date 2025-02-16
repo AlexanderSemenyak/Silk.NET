@@ -31,6 +31,7 @@ namespace Silk.NET.Windowing.Internals
         protected abstract string CoreTitle { get; set; }
         protected abstract WindowState CoreWindowState { get; set; }
         protected abstract WindowBorder CoreWindowBorder { get; set; }
+        protected abstract bool CoreTopMost { get; set; }
         protected abstract bool IsClosingSettable { set; }
         protected abstract Vector2D<int> SizeSettable { set; }
         protected abstract Rectangle<int> CoreBorderSize { get; }
@@ -59,6 +60,7 @@ namespace Silk.NET.Windowing.Internals
         // Lifetime controls
         protected override void CoreInitialize(ViewOptions opts)
         {
+            _swapIntervalChanged = true;
             ExtendedOptionsCache.ShouldSwapAutomatically = opts.ShouldSwapAutomatically;
             ExtendedOptionsCache.IsEventDriven = opts.IsEventDriven;
             ExtendedOptionsCache.FramesPerSecond = opts.FramesPerSecond;
@@ -156,6 +158,7 @@ namespace Silk.NET.Windowing.Internals
                     CoreWindowState = value;
                 }
 
+                _swapIntervalChanged = true;
                 ExtendedOptionsCache.WindowState = value;
             }
         }
@@ -178,6 +181,21 @@ namespace Silk.NET.Windowing.Internals
 
         // Other property implementations
         public bool TransparentFramebuffer => ExtendedOptionsCache.TransparentFramebuffer;
+
+        public bool TopMost
+        {
+            get => IsInitialized ? ExtendedOptionsCache.TopMost = CoreTopMost : ExtendedOptionsCache.TopMost;
+            set
+            {
+                if (IsInitialized)
+                {
+                    CoreTopMost = value;
+                }
+
+                ExtendedOptionsCache.TopMost = value;
+            }
+        }
+
         public Rectangle<int> BorderSize => IsInitialized ? CoreBorderSize : default;
     }
 }

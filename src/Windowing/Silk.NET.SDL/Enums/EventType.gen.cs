@@ -47,6 +47,8 @@ namespace Silk.NET.SDL
         Textinput = 0x303,
         [NativeName("Name", "SDL_KEYMAPCHANGED")]
         Keymapchanged = 0x304,
+        [NativeName("Name", "SDL_TEXTEDITING_EXT")]
+        TexteditingExt = 0x305,
         [NativeName("Name", "SDL_MOUSEMOTION")]
         Mousemotion = 0x400,
         [NativeName("Name", "SDL_MOUSEBUTTONDOWN")]
@@ -69,6 +71,8 @@ namespace Silk.NET.SDL
         Joydeviceadded = 0x605,
         [NativeName("Name", "SDL_JOYDEVICEREMOVED")]
         Joydeviceremoved = 0x606,
+        [NativeName("Name", "SDL_JOYBATTERYUPDATED")]
+        Joybatteryupdated = 0x607,
         [NativeName("Name", "SDL_CONTROLLERAXISMOTION")]
         Controlleraxismotion = 0x650,
         [NativeName("Name", "SDL_CONTROLLERBUTTONDOWN")]
@@ -89,6 +93,10 @@ namespace Silk.NET.SDL
         Controllertouchpadup = 0x658,
         [NativeName("Name", "SDL_CONTROLLERSENSORUPDATE")]
         Controllersensorupdate = 0x659,
+        [NativeName("Name", "SDL_CONTROLLERUPDATECOMPLETE_RESERVED_FOR_SDL3")]
+        ControllerupdatecompleteReservedForSdl3 = 0x65A,
+        [NativeName("Name", "SDL_CONTROLLERSTEAMHANDLEUPDATED")]
+        Controllersteamhandleupdated = 0x65B,
         [NativeName("Name", "SDL_FINGERDOWN")]
         Fingerdown = 0x700,
         [NativeName("Name", "SDL_FINGERUP")]
@@ -121,6 +129,8 @@ namespace Silk.NET.SDL
         RenderTargetsReset = 0x2000,
         [NativeName("Name", "SDL_RENDER_DEVICE_RESET")]
         RenderDeviceReset = 0x2001,
+        [NativeName("Name", "SDL_POLLSENTINEL")]
+        Pollsentinel = 0x7F00,
         [NativeName("Name", "SDL_USEREVENT")]
         Userevent = 0x8000,
         [NativeName("Name", "SDL_LASTEVENT")]

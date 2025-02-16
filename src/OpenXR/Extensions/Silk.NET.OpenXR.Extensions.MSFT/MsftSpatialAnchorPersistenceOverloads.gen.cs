@@ -17,21 +17,21 @@ namespace Silk.NET.OpenXR.Extensions.MSFT
     public static class MsftSpatialAnchorPersistenceOverloads
     {
         /// <summary>To be documented.</summary>
-        public static unsafe Result CreateSpatialAnchorFromPersistedNameMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] Session session, [Count(Count = 0), Flow(FlowDirection.In)] SpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo, [Count(Count = 0)] Span<SpatialAnchorMSFT> spatialAnchor)
+        public static unsafe Result CreateSpatialAnchorFromPersistedNameMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] Session session, [Count(Count = 0), Flow(Silk.NET.Core.Native.FlowDirection.In)] SpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo, [Count(Count = 0)] Span<SpatialAnchorMSFT> spatialAnchor)
         {
             // SpanOverloader
             return thisApi.CreateSpatialAnchorFromPersistedNameMsft(session, spatialAnchorCreateInfo, ref spatialAnchor.GetPinnableReference());
         }
 
         /// <summary>To be documented.</summary>
-        public static unsafe Result CreateSpatialAnchorFromPersistedNameMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] Session session, [Count(Count = 0), Flow(FlowDirection.In)] ReadOnlySpan<SpatialAnchorFromPersistedAnchorCreateInfoMSFT> spatialAnchorCreateInfo, [Count(Count = 0)] SpatialAnchorMSFT* spatialAnchor)
+        public static unsafe Result CreateSpatialAnchorFromPersistedNameMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] Session session, [Count(Count = 0), Flow(Silk.NET.Core.Native.FlowDirection.In)] ReadOnlySpan<SpatialAnchorFromPersistedAnchorCreateInfoMSFT> spatialAnchorCreateInfo, [Count(Count = 0)] SpatialAnchorMSFT* spatialAnchor)
         {
             // SpanOverloader
             return thisApi.CreateSpatialAnchorFromPersistedNameMsft(session, in spatialAnchorCreateInfo.GetPinnableReference(), spatialAnchor);
         }
 
         /// <summary>To be documented.</summary>
-        public static unsafe Result CreateSpatialAnchorFromPersistedNameMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] Session session, [Count(Count = 0), Flow(FlowDirection.In)] ReadOnlySpan<SpatialAnchorFromPersistedAnchorCreateInfoMSFT> spatialAnchorCreateInfo, [Count(Count = 0)] Span<SpatialAnchorMSFT> spatialAnchor)
+        public static unsafe Result CreateSpatialAnchorFromPersistedNameMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] Session session, [Count(Count = 0), Flow(Silk.NET.Core.Native.FlowDirection.In)] ReadOnlySpan<SpatialAnchorFromPersistedAnchorCreateInfoMSFT> spatialAnchorCreateInfo, [Count(Count = 0)] Span<SpatialAnchorMSFT> spatialAnchor)
         {
             // SpanOverloader
             return thisApi.CreateSpatialAnchorFromPersistedNameMsft(session, in spatialAnchorCreateInfo.GetPinnableReference(), ref spatialAnchor.GetPinnableReference());
@@ -45,35 +45,35 @@ namespace Silk.NET.OpenXR.Extensions.MSFT
         }
 
         /// <summary>To be documented.</summary>
-        public static unsafe Result EnumeratePersistedSpatialAnchorNamesMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0)] uint spatialAnchorNamesCapacityInput, [Count(Count = 0)] uint* spatialAnchorNamesCountOutput, [Count(Parameter = "spatialAnchorNamesCapacityInput")] Span<SpatialAnchorPersistenceNameMSFT> persistedAnchorNames)
+        public static unsafe Result EnumeratePersistedSpatialAnchorNamesMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0)] uint spatialAnchorNameCapacityInput, [Count(Count = 0)] uint* spatialAnchorNameCountOutput, [Count(Parameter = "spatialAnchorNameCapacityInput")] Span<SpatialAnchorPersistenceNameMSFT> spatialAnchorNames)
         {
             // SpanOverloader
-            return thisApi.EnumeratePersistedSpatialAnchorNamesMsft(spatialAnchorStore, spatialAnchorNamesCapacityInput, spatialAnchorNamesCountOutput, ref persistedAnchorNames.GetPinnableReference());
+            return thisApi.EnumeratePersistedSpatialAnchorNamesMsft(spatialAnchorStore, spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, ref spatialAnchorNames.GetPinnableReference());
         }
 
         /// <summary>To be documented.</summary>
-        public static unsafe Result EnumeratePersistedSpatialAnchorNamesMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0)] uint spatialAnchorNamesCapacityInput, [Count(Count = 0)] Span<uint> spatialAnchorNamesCountOutput, [Count(Parameter = "spatialAnchorNamesCapacityInput")] SpatialAnchorPersistenceNameMSFT* persistedAnchorNames)
+        public static unsafe Result EnumeratePersistedSpatialAnchorNamesMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0)] uint spatialAnchorNameCapacityInput, [Count(Count = 0)] Span<uint> spatialAnchorNameCountOutput, [Count(Parameter = "spatialAnchorNameCapacityInput")] SpatialAnchorPersistenceNameMSFT* spatialAnchorNames)
         {
             // SpanOverloader
-            return thisApi.EnumeratePersistedSpatialAnchorNamesMsft(spatialAnchorStore, spatialAnchorNamesCapacityInput, ref spatialAnchorNamesCountOutput.GetPinnableReference(), persistedAnchorNames);
+            return thisApi.EnumeratePersistedSpatialAnchorNamesMsft(spatialAnchorStore, spatialAnchorNameCapacityInput, ref spatialAnchorNameCountOutput.GetPinnableReference(), spatialAnchorNames);
         }
 
         /// <summary>To be documented.</summary>
-        public static unsafe Result EnumeratePersistedSpatialAnchorNamesMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0)] uint spatialAnchorNamesCapacityInput, [Count(Count = 0)] Span<uint> spatialAnchorNamesCountOutput, [Count(Parameter = "spatialAnchorNamesCapacityInput")] Span<SpatialAnchorPersistenceNameMSFT> persistedAnchorNames)
+        public static unsafe Result EnumeratePersistedSpatialAnchorNamesMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0)] uint spatialAnchorNameCapacityInput, [Count(Count = 0)] Span<uint> spatialAnchorNameCountOutput, [Count(Parameter = "spatialAnchorNameCapacityInput")] Span<SpatialAnchorPersistenceNameMSFT> spatialAnchorNames)
         {
             // SpanOverloader
-            return thisApi.EnumeratePersistedSpatialAnchorNamesMsft(spatialAnchorStore, spatialAnchorNamesCapacityInput, ref spatialAnchorNamesCountOutput.GetPinnableReference(), ref persistedAnchorNames.GetPinnableReference());
+            return thisApi.EnumeratePersistedSpatialAnchorNamesMsft(spatialAnchorStore, spatialAnchorNameCapacityInput, ref spatialAnchorNameCountOutput.GetPinnableReference(), ref spatialAnchorNames.GetPinnableReference());
         }
 
         /// <summary>To be documented.</summary>
-        public static unsafe Result PersistSpatialAnchorMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0), Flow(FlowDirection.In)] ReadOnlySpan<SpatialAnchorPersistenceInfoMSFT> spatialAnchorPersistenceInfo)
+        public static unsafe Result PersistSpatialAnchorMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0), Flow(Silk.NET.Core.Native.FlowDirection.In)] ReadOnlySpan<SpatialAnchorPersistenceInfoMSFT> spatialAnchorPersistenceInfo)
         {
             // SpanOverloader
             return thisApi.PersistSpatialAnchorMsft(spatialAnchorStore, in spatialAnchorPersistenceInfo.GetPinnableReference());
         }
 
         /// <summary>To be documented.</summary>
-        public static unsafe Result UnpersistSpatialAnchorMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0), Flow(FlowDirection.In)] ReadOnlySpan<SpatialAnchorPersistenceNameMSFT> spatialAnchorPersistenceName)
+        public static unsafe Result UnpersistSpatialAnchorMsft(this MsftSpatialAnchorPersistence thisApi, [Count(Count = 0)] SpatialAnchorStoreConnectionMSFT spatialAnchorStore, [Count(Count = 0), Flow(Silk.NET.Core.Native.FlowDirection.In)] ReadOnlySpan<SpatialAnchorPersistenceNameMSFT> spatialAnchorPersistenceName)
         {
             // SpanOverloader
             return thisApi.UnpersistSpatialAnchorMsft(spatialAnchorStore, in spatialAnchorPersistenceName.GetPinnableReference());

@@ -37,7 +37,7 @@ namespace Silk.NET.Windowing
                     ", ",
                     Platforms.Select
                     (
-                        x => x.GetType().Name + (x.IsViewOnly ? " - view only" :
+                        x => GetName(x) + (x.IsViewOnly ? " - view only" :
                             !x.IsApplicable ? " - not applicable" : string.Empty)
                     )
                 );
@@ -47,13 +47,26 @@ namespace Silk.NET.Windowing
             }
         }
 
+#if NETSTANDARD2_1
+        private static string GetName(IWindowPlatform x) => x.Name;
+#else
+        private static string GetName(IWindowPlatform x) => x.GetType().Name;
+#endif
+        
         static Window()
         {
-            var defaultWindowClassName = Process.GetCurrentProcess().MainModule?.ModuleName;
-            if (defaultWindowClassName is not null)
+            try
             {
-                DefaultWindowClass = Path.GetFileNameWithoutExtension(defaultWindowClassName);
-                return;
+                var defaultWindowClassName = Process.GetCurrentProcess().MainModule?.ModuleName;
+                if (defaultWindowClassName is not null)
+                {
+                    DefaultWindowClass = Path.GetFileNameWithoutExtension(defaultWindowClassName);
+                    return;
+                }
+            }
+            catch
+            {
+                // System.Diagnostics.Process is not supported on the WASI-SDK
             }
 
             DefaultWindowClass = Assembly.GetEntryAssembly()?.GetName()?.Name ?? FallbackWindowClass;
@@ -249,6 +262,34 @@ namespace Silk.NET.Windowing
             }
 
             Prioritize(platform);
+        }
+
+        /// <summary>
+        /// <see cref="Prioritize"/>s the platform of type <typeparamref name="T"/> if it's already been added,
+        /// otherwise it uses <paramref name="factory"/> to create an instance to <see cref="Add"/> the platform. The
+        /// instance used is returned.
+        /// </summary>
+        /// <param name="factory">The factory to use if the platform has not been registered.</param>
+        /// <param name="isFirstParty">If true, first-party reflection-based loading will be disabled.</param>
+        /// <typeparam name="T">The platform type.</typeparam>
+        /// <returns>The platform instance.</returns>
+        public static T PrioritizeOrAdd<T>(Func<T> factory, bool isFirstParty = false) where T: IWindowPlatform
+        {
+            if (isFirstParty)
+            {
+                _initializedFirstPartyPlatforms = true;
+            }
+
+            var platform = (T?)_platformsValues.FirstOrDefault(x => x is T);
+            if (platform is null)
+            {
+                var inst = factory();
+                Add(inst);
+                return inst;
+            }
+
+            Prioritize(platform);
+            return platform;
         }
 
         /// <summary>

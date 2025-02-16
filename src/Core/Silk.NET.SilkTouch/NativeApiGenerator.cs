@@ -57,12 +57,9 @@ namespace Silk.NET.SilkTouch
             if (excludeFromOverrideAttribute is null)
                 return;
 
-            _nativeContextAttributes[pInvokeAttribute] = array => ((int) array[0].Value!,
-                (string) array[1].Value! /* first return is just the lib target */, new PInvokeNativeContextOverride());
-
 
             var marshalBuilder = new MarshalBuilder();
-            
+
             // begin            |           end
             marshalBuilder.Use(Middlewares.InjectMiddleware);
             marshalBuilder.Use(Middlewares.ParameterInitMiddleware);
@@ -79,7 +76,7 @@ namespace Silk.NET.SilkTouch
 
             List<ITypeSymbol> processedSymbols = new List<ITypeSymbol>();
 
-
+            var overrideLog = new List<(string Class, int Override)>();
             foreach (var group in receiver.ClassDeclarations.Select(x => (x.Item1, x.Item2, x.Item2.GetDeclaredSymbol(x.Item1)))
                 .GroupBy(x => x.Item3, SymbolEqualityComparer.Default))
             {
@@ -88,7 +85,7 @@ namespace Silk.NET.SilkTouch
                     var s = ProcessClassDeclaration
                     (
                         group.Select(x => (x.Item1, x.Item2)), context, nativeApiAttribute, marshalBuilder, ref processedSymbols,
-                        excludeFromOverrideAttribute, (INamedTypeSymbol)group.Key
+                        excludeFromOverrideAttribute, (INamedTypeSymbol) group.Key, ref overrideLog, pInvokeAttribute
                     );
 
                     if (s is not { Length: > 0 }) continue;
@@ -104,6 +101,199 @@ namespace Silk.NET.SilkTouch
                     );
                 }
             }
+            if (overrideLog.Count > 0)
+            {
+                var standardProp = PropertyDeclaration
+                    (
+                        PredefinedType(Token(SyntaxKind.BoolKeyword)),
+                        Identifier("HasLinkTimeSubstitutions")
+                    )
+                    .WithModifiers(TokenList(new[] { Token(SyntaxKind.InternalKeyword), Token(SyntaxKind.StaticKeyword) }))
+                    .WithAccessorList
+                    (
+                        AccessorList
+                        (
+                            SingletonList
+                            (
+                                AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithExpressionBody
+                                (
+                                    ArrowExpressionClause(LiteralExpression(SyntaxKind.FalseLiteralExpression))
+                                ).WithSemicolonToken(Token(SyntaxKind.SemicolonToken))
+                            )
+                        )
+                    );
+                var otherProps = overrideLog.SelectMany
+                (
+                    log =>
+                    {
+                        var propName = $"{log.Class.Replace(".", "")}PInvokeOverride{log.Override}";
+                        return new MemberDeclarationSyntax[]
+                        {
+                            FieldDeclaration
+                            (
+                                VariableDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword))).WithVariables
+                                (
+                                    SingletonSeparatedList
+                                    (
+                                        VariableDeclarator(Identifier($"_fold{propName}"))
+                                            .WithInitializer
+                                            (
+                                                EqualsValueClause(LiteralExpression(SyntaxKind.FalseLiteralExpression))
+                                            )
+                                    )
+                                )
+                            ).WithModifiers
+                            (
+                                TokenList
+                                (
+                                    new[]
+                                    {
+                                        Token(SyntaxKind.PrivateKeyword),
+                                        Token(SyntaxKind.StaticKeyword),
+                                        Token(SyntaxKind.ReadOnlyKeyword)
+                                    }
+                                )
+                            ),
+                            PropertyDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword)),Identifier(propName))
+                                .WithModifiers
+                                (
+                                    TokenList(new []{Token(SyntaxKind.InternalKeyword),Token(SyntaxKind.StaticKeyword)})
+                                )
+                                .WithAccessorList
+                                (
+                                    AccessorList
+                                    (
+                                        SingletonList
+                                        (
+                                            AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                                                .WithExpressionBody
+                                                (
+                                                    ArrowExpressionClause(IdentifierName($"_fold{propName}"))
+                                                ).WithSemicolonToken(Token(SyntaxKind.SemicolonToken))
+                                        )
+                                    )
+                                )
+                        };
+                    }
+                );
+                var ctor = ConstructorDeclaration(Identifier("SilkTouchRuntimeConfiguration"))
+                    .WithModifiers(TokenList(Token(SyntaxKind.StaticKeyword)))
+                    .WithBody
+                    (
+                        Block
+                        (
+                            SingletonList
+                            (
+                                IfStatement
+                                (
+                                    PrefixUnaryExpression
+                                    (
+                                        SyntaxKind.LogicalNotExpression,
+                                        IdentifierName("HasLinkTimeSubstitutions")
+                                    ),
+                                    Block
+                                    (
+                                        List<StatementSyntax>
+                                        (
+                                            overrideLog.Select
+                                            (
+                                                (log, i) => ExpressionStatement
+                                                (
+                                                    AssignmentExpression
+                                                    (
+                                                        SyntaxKind.SimpleAssignmentExpression,
+                                                        IdentifierName($"_fold{log.Class.Replace(".", "")}PInvokeOverride{log.Override}"),
+                                                        BinaryExpression
+                                                        (
+                                                            SyntaxKind.LogicalAndExpression,
+                                                            InvocationExpression
+                                                            (
+                                                                MemberAccessExpression
+                                                                (
+                                                                    SyntaxKind.SimpleMemberAccessExpression,
+                                                                    MemberAccessExpression
+                                                                    (
+                                                                        SyntaxKind.SimpleMemberAccessExpression,
+                                                                        AliasQualifiedName
+                                                                        (
+                                                                            IdentifierName(Token(SyntaxKind.GlobalKeyword)),
+                                                                            IdentifierName("System")
+                                                                        ),
+                                                                        IdentifierName("AppContext")
+                                                                    ),
+                                                                    IdentifierName("TryGetSwitch")
+                                                                )
+                                                            ).WithArgumentList
+                                                            (
+                                                                ArgumentList
+                                                                (
+                                                                    SeparatedList<ArgumentSyntax>
+                                                                    (
+                                                                        new SyntaxNodeOrToken[]
+                                                                        {
+                                                                            Argument(LiteralExpression
+                                                                            (
+                                                                                SyntaxKind.StringLiteralExpression,
+                                                                                Literal( $"{log.Class.Replace(".", "_").ToUpper()}_ENABLE_PINVOKE_OVERRIDE_{log.Override}"
+                                                                            ))),
+                                                                            Token(SyntaxKind.CommaToken),
+                                                                            Argument(DeclarationExpression
+                                                                            (
+                                                                                IdentifierName
+                                                                                (
+                                                                                    Identifier
+                                                                                    (
+                                                                                        TriviaList(),
+                                                                                        SyntaxKind.VarKeyword,
+                                                                                        "var",
+                                                                                        "var",
+                                                                                        TriviaList()
+                                                                                    )
+                                                                                ),
+                                                                                SingleVariableDesignation(Identifier($"e{i}"))))
+                                                                                    .WithRefOrOutKeyword(Token(SyntaxKind.OutKeyword))
+                                                                        }
+                                                                    )
+                                                                )
+                                                            ),
+                                                            IdentifierName($"e{i}")
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    );
+                Output
+                (
+                    context,
+                    "SilkTouchRuntimeConfiguration",
+                    CompilationUnit().WithMembers
+                    (
+                        SingletonList<MemberDeclarationSyntax>
+                        (
+                            ClassDeclaration("SilkTouchRuntimeConfiguration")
+                                .WithModifiers
+                                (
+                                    TokenList
+                                    (
+                                        new[] { Token(SyntaxKind.InternalKeyword), Token(SyntaxKind.StaticKeyword) }
+                                    )
+                                )
+                                .WithMembers
+                                (
+                                    List
+                                    (
+                                        Enumerable.Repeat(standardProp, 1).Concat(otherProps).Concat(Enumerable.Repeat(ctor, 1))
+                                    )
+                                )
+                        )
+                    ).NormalizeWhitespace().ToFullString()
+                );
+            }
         }
 
         private static void Output(GeneratorExecutionContext context, string hintName, string s)
@@ -111,7 +301,7 @@ namespace Silk.NET.SilkTouch
             hintName = hintName.Select(x => char.IsLetterOrDigit(x) ? x : '_').ToArray().AsSpan().ToString();
             var name = $"{hintName}.{Guid.NewGuid()}.gen";
             context.AddSource(name, SourceText.From(s, Encoding.UTF8));
-            // File.WriteAllText(@"C:\SILK.NET\src\Lab\" + name, s);
+            // File.WriteAllText(@"C:\st\" + name, s);
         }
 
         private string ProcessClassDeclaration
@@ -122,9 +312,13 @@ namespace Silk.NET.SilkTouch
             MarshalBuilder rootMarshalBuilder,
             ref List<ITypeSymbol> processedSymbols,
             INamedTypeSymbol excludeFromOverrideAttribute,
-            INamedTypeSymbol sharedClassSymbol
+            INamedTypeSymbol sharedClassSymbol,
+            ref List<(string Class, int Override)> overrideLog,
+            INamedTypeSymbol pInvokeAttribute
         )
         {
+            _nativeContextAttributes[pInvokeAttribute] = array => ((int) array[0].Value!,
+                (string) array[1].Value! /* first return is just the lib target */, new PInvokeNativeContextOverride());
             var stopwatch = Stopwatch.StartNew();
             var compilation = sourceContext.Compilation;
             if (!classDeclarations.First().Item1.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword)))
@@ -132,7 +326,7 @@ namespace Silk.NET.SilkTouch
 
             if (!classDeclarations.All(x => x.Item1.Parent.IsKind(SyntaxKind.NamespaceDeclaration)))
                 return null;
-            
+
             var namespaceDeclaration = (NamespaceDeclarationSyntax) classDeclarations.First().Item1.Parent;
 
             if (!namespaceDeclaration.Parent.IsKind(SyntaxKind.CompilationUnit))
@@ -143,7 +337,7 @@ namespace Silk.NET.SilkTouch
             if (!compilation.HasImplicitConversion
                 (sharedClassSymbol, compilation.GetTypeByMetadataName("Silk.NET.Core.Native.NativeApiContainer")))
                 return null;
-            
+
             var classIsSealed = classDeclarations.First().Item1.Modifiers.Any(x => x.Text == "sealed");
             var generateSeal = false;
 
@@ -154,15 +348,15 @@ namespace Silk.NET.SilkTouch
                 if (bool.TryParse(generateSealstr, out var v))
                     generateSeal = v;
             }
-            
+
             bool compactFileFormat;
 
-            #if DEBUG
+#if DEBUG
             compactFileFormat = true;
-            #else
+#else
             compactFileFormat = false;
-            #endif
-            
+#endif
+
             if (sourceContext.AnalyzerConfigOptions.GetOptions
                     (classDeclarations.First().Item1.SyntaxTree)
                 .TryGetValue("silk_touch_compact_file_format", out var compactFileFormatStr))
@@ -170,8 +364,8 @@ namespace Silk.NET.SilkTouch
                 if (bool.TryParse(compactFileFormatStr, out var v))
                     compactFileFormat = v;
             }
-            
-            
+
+
             var generateVTable = false;
 
             if (sourceContext.AnalyzerConfigOptions.GetOptions
@@ -181,7 +375,7 @@ namespace Silk.NET.SilkTouch
                 if (bool.TryParse(genvtablestr, out var v))
                     generateVTable = v;
             }
-            
+
             var preloadVTable = false;
 
             if (sourceContext.AnalyzerConfigOptions.GetOptions
@@ -191,7 +385,7 @@ namespace Silk.NET.SilkTouch
                 if (bool.TryParse(vtablepreloadstr, out var v))
                     preloadVTable = v;
             }
-            
+
             var emitAssert = false;
 
             if (sourceContext.AnalyzerConfigOptions.GetOptions
@@ -212,7 +406,7 @@ namespace Silk.NET.SilkTouch
             var newMembers = new List<MemberDeclarationSyntax>();
 
             int gcCount = 0;
-            
+
             var generatedVTableName = NameGenerator.Name("GeneratedVTable");
             var entryPoints = new List<string>();
             var processedEntrypoints = new List<EntryPoint>();
@@ -236,7 +430,7 @@ namespace Silk.NET.SilkTouch
                 select (declaration, symbol, entryPoint, callingConvention))
             {
                 any = true;
-            
+
                 ProcessMethod
                 (
                     sourceContext, rootMarshalBuilder, callingConvention, entryPoints, entryPoint, classIsSealed,
@@ -309,7 +503,7 @@ namespace Silk.NET.SilkTouch
                                         Token(SyntaxKind.ProtectedKeyword), Token(SyntaxKind.SealedKeyword),
                                         Token(SyntaxKind.OverrideKeyword)
                                     }
-                                    : new[] {Token(SyntaxKind.ProtectedKeyword), Token(SyntaxKind.OverrideKeyword)}
+                                    : new[] { Token(SyntaxKind.ProtectedKeyword), Token(SyntaxKind.OverrideKeyword) }
                             )
                         )
                         .WithExpressionBody
@@ -331,9 +525,10 @@ namespace Silk.NET.SilkTouch
                 ref newMembers,
                 sharedClassSymbol,
                 excludeFromOverrideAttribute,
-                compilation
+                compilation,
+                ref overrideLog
             );
-            
+
             var newNamespace = namespaceDeclaration.WithMembers
                 (
                     List
@@ -370,7 +565,7 @@ namespace Silk.NET.SilkTouch
         private static SyntaxList<UsingDirectiveSyntax> AddIfNotExists
             (SyntaxList<UsingDirectiveSyntax> list, params string[] usings)
         {
-            foreach(var v in usings)
+            foreach (var v in usings)
                 if (!list.Any(x => x.Name is IdentifierNameSyntax a && a.Identifier.Text == v))
                     list = list.Add(UsingDirective(IdentifierName(v)));
 
@@ -427,7 +622,7 @@ namespace Silk.NET.SilkTouch
 
                 var parameters = ctx.ResolveAllLoadParameters();
 
-                
+
                 entryPoints.Add(entryPoint);
                 processedEntrypoints.Add
                 (
@@ -472,7 +667,7 @@ namespace Silk.NET.SilkTouch
                 {
                     throw new Exception("FORCE-USE-VTABLE");
                 }
-                
+
 
                 if (needsInvocationShim)
                 {
@@ -503,7 +698,7 @@ namespace Silk.NET.SilkTouch
 
                 marshalBuilder.Use(BuildLoadInvoke);
 
-                var context = new MarshalContext(compilation, symbol);
+                var context = new MarshalContext(compilation, symbol, entryPoint);
 
                 marshalBuilder.Run(context);
 
@@ -544,7 +739,7 @@ namespace Silk.NET.SilkTouch
                     )
                     .WithReturnType
                         (IdentifierName(symbol.ReturnType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)));
-                
+
                 if (compactFileFormat)
                 {
                     // append to members
@@ -566,7 +761,7 @@ namespace Silk.NET.SilkTouch
                             )
                         )
                         .WithUsings(generationusings);
-        
+
                     var result = newNamespace.NormalizeWhitespace().ToFullString();
                     Output(sourceContext, symbol.ToDisplayString(), result);
                 }
@@ -601,7 +796,7 @@ namespace Silk.NET.SilkTouch
                     )
                 )
             );
-            
+
             StatementSyntax ManualWinapiInvokeShim(IMarshalContext ctx)
             {
                 var stdCallStmt = ManualWinapiInvokeInnerExpr(ctx, CallingConvention.StdCall);

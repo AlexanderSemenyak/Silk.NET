@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -100,6 +101,16 @@ namespace Silk.NET.BuildTools.Common.Functions
         /// members.
         /// </summary>
         public bool IsReadOnly { get; set; }
+        
+        /// <summary>
+        /// Whether this method is an override.
+        /// </summary>
+        public bool IsOverride { get; set; }
+
+        /// <summary>
+        /// Prefix to invocations of this function e.g. "@this->". May be null.
+        /// </summary>
+        public string? InvocationPrefix { get; set; }
 
         /// <inheritdoc />
         public override string ToString()
@@ -113,7 +124,9 @@ namespace Silk.NET.BuildTools.Common.Functions
             bool accessibility = false,
             bool @static = false,
             bool semicolon = true,
-            bool @delegate = false)
+            bool @delegate = false,
+            bool returnType = true,
+            bool appendAttributes = true)
         {
             var sb = new StringBuilder();
 
@@ -122,12 +135,12 @@ namespace Silk.NET.BuildTools.Common.Functions
                 sb.AppendLine($"[UnmanagedFunctionPointer(CallingConvention.{Convention})]");
             }
 
-            GetDeclarationString(sb, @unsafe, partial, accessibility, @static, @delegate);
+            GetDeclarationString(sb, @unsafe, partial, accessibility, @static, @delegate, returnType);
 
-            sb.Append("(");
+            sb.Append('(');
             if (Parameters.Count > 0)
             {
-                var parameterDeclarations = Parameters.Select(GetDeclarationString).ToList();
+                var parameterDeclarations = Parameters.Select(param => GetDeclarationString(param, appendAttributes)).ToList();
                 for (var index = 0; index < parameterDeclarations.Count; index++)
                 {
                     if (index != 0)
@@ -140,11 +153,11 @@ namespace Silk.NET.BuildTools.Common.Functions
                 }
             }
 
-            sb.Append(")");
+            sb.Append(')');
 
             if (GenericTypeParameters.Count != 0)
             {
-                sb.Append(" ");
+                sb.Append(' ');
                 for (var index = 0; index < GenericTypeParameters.Count; index++)
                 {
                     var p = GenericTypeParameters[index];
@@ -155,14 +168,14 @@ namespace Silk.NET.BuildTools.Common.Functions
                     sb.Append($"where {p.Name} : {constraints}");
                     if (index != GenericTypeParameters.Count - 1)
                     {
-                        sb.Append(" ");
+                        sb.Append(' ');
                     }
                 }
             }
 
             if (semicolon)
             {
-                sb.Append(";");
+                sb.Append(';');
             }
 
             return sb.ToString();
@@ -173,7 +186,8 @@ namespace Silk.NET.BuildTools.Common.Functions
             bool partial = false,
             bool accessibility = false,
             bool @static = false,
-            bool @delegate = false)
+            bool @delegate = false,
+            bool returnType = true)
         {
             if (accessibility)
             {
@@ -203,6 +217,11 @@ namespace Silk.NET.BuildTools.Common.Functions
                 sb.Append("unsafe ");
             }
 
+            if (IsOverride)
+            {
+                sb.Append("override ");
+            }
+
             if (partial)
             {
                 sb.Append("partial ");
@@ -213,8 +232,11 @@ namespace Silk.NET.BuildTools.Common.Functions
                 sb.Append("delegate ");
             }
 
-            sb.Append(ReturnType);
-            sb.Append(" ");
+            if (returnType)
+            {
+                sb.Append(ReturnType);
+                sb.Append(" ");
+            }
 
             sb.Append(Name);
             if (GenericTypeParameters.Count != 0)
@@ -227,48 +249,63 @@ namespace Silk.NET.BuildTools.Common.Functions
             }
         }
 
-                private static string GetDeclarationString(Parameter parameter)
+        private static string GetDeclarationString(Parameter parameter, bool appendAttributes = true)
         {
             var sb = new StringBuilder();
 
-            var attributes = new List<string>();
-
-            if (!(parameter.Count is null))
+            if (appendAttributes)
             {
-                if (parameter.Count.IsStatic)
-                {
-                    attributes.Add($"Count(Count = {parameter.Count.StaticCount})");
-                }
-                else if (parameter.Count.IsComputed)
-                {
-                    var parameterList = string.Join(", ", parameter.Count.ComputedFromNames);
-                    attributes.Add($"Count(Computed = \"{parameterList}\")");
-                }
-                else if (parameter.Count.IsReference)
-                {
-                    // ReSharper disable once PossibleNullReferenceException
-                    attributes.Add($"Count(Parameter = \"{parameter.Count.ValueReference}\")");
-                }
-            }
+                var attributes = new List<string>();
 
-            // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (parameter.Flow)
-            {
-                case FlowDirection.In:
-                    attributes.Add("Flow(FlowDirection.In)");
-                    break;
-                case FlowDirection.Out:
-                    attributes.Add("Flow(FlowDirection.Out)");
-                    break;
-            }
+                if (!(parameter.Count is null))
+                {
+                    if (parameter.Count.IsStatic)
+                    {
+                        attributes.Add($"Count(Count = {parameter.Count.StaticCount})");
+                    }
+                    else if (parameter.Count.IsComputed)
+                    {
+                        var parameterList = string.Join(", ", parameter.Count.ComputedFromNames).Replace("\\", "\\\\");
+                        attributes.Add($"Count(Computed = \"{parameterList}\")");
+                    }
+                    else if (parameter.Count.IsReference)
+                    {
+                        // ReSharper disable once PossibleNullReferenceException
+                        if (parameter.Count.Expression is not null)
+                        {
+                            attributes.Add($"Count(Parameter = \"{parameter.Count.ValueReference}\", Expression = \"{parameter.Count.Expression}\")");
+                        }
+                        else
+                        {
+                            attributes.Add($"Count(Parameter = \"{parameter.Count.ValueReference}\")");
+                        }
+                    }
+                }
 
-            attributes.AddRange(parameter.Attributes.Select(x => x.Name + "(" + string.Join(", ", x.Arguments) + ")"));
+                // ReSharper disable once SwitchStatementMissingSomeCases
+                switch (parameter.Flow)
+                {
+                    case FlowDirection.In:
+                        attributes.Add("Flow(Silk.NET.Core.Native.FlowDirection.In)");
+                        break;
+                    case FlowDirection.Out:
+                        attributes.Add("Flow(Silk.NET.Core.Native.FlowDirection.Out)");
+                        break;
+                }
 
-            if (attributes.Count != 0)
-            {
-                sb.Append("[");
-                sb.Append(string.Join(", ", attributes));
-                sb.Append("] ");
+                attributes.AddRange
+                (
+                    parameter.Attributes
+                        .Where(x => x.Name != "BuildToolsIntrinsic")
+                        .Select(x => x.Name + "(" + string.Join(", ", x.Arguments) + ")")
+                );
+
+                if (attributes.Count != 0)
+                {
+                    sb.Append("[");
+                    sb.Append(string.Join(", ", attributes));
+                    sb.Append("] ");
+                }
             }
 
             sb.Append(parameter.Type);
@@ -348,5 +385,11 @@ namespace Silk.NET.BuildTools.Common.Functions
             var paramTypes = string.Join(", ", Parameters.Select(x => x.Type).Concat(new[] {ReturnType}));
             return $"delegate* unmanaged{convention}<{paramTypes}>";
         }
+
+        /// <summary>
+        /// Gets all attributes that are actual attributes and not BuildTools intrinsics.
+        /// </summary>
+        /// <returns>Attributes.</returns>
+        public IEnumerable<Attribute> GetAttributes() => Attributes.Where(x => x.Name != "BuildToolsIntrinsic");
     }
 }

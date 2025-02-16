@@ -12,16 +12,13 @@ namespace Silk.NET.XInput
     {
         public static XInput GetApi()
         {
-             throw new NotImplementedException();
+            return new XInput(CreateDefaultContext("XInput1_3"));
         }
 
         public bool TryGetExtension<T>(out T ext)
             where T:NativeExtension<XInput>
         {
-             ext = IsExtensionPresent(ExtensionAttribute.GetExtensionAttribute(typeof(T)).Name)
-                 ? (T) Activator.CreateInstance(typeof(T), Context)
-                 : null;
-             return ext is not null;
+            throw new NotImplementedException();
         }
 
         public override bool IsExtensionPresent(string extension)

@@ -44,9 +44,12 @@ namespace Tutorial
 
             window.Load += OnLoad;
             window.Render += OnRender;
+            window.FramebufferResize += OnFramebufferResize;
             window.Closing += OnClose;
 
             window.Run();
+
+            window.Dispose();
         }
 
 
@@ -104,6 +107,11 @@ namespace Tutorial
 
                 Gl.DrawElements(PrimitiveType.Triangles, (uint) Indices.Length, DrawElementsType.UnsignedInt, null);
             }
+        }
+
+        private static void OnFramebufferResize(Vector2D<int> newSize)
+        {
+            Gl.Viewport(newSize);
         }
 
         private static void OnClose()

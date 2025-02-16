@@ -102,13 +102,31 @@ namespace Silk.NET.Vulkan
         IndirectCommandsLayoutNV = 1000277000,
         [NativeName("Name", "VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT")]
         PrivateDataSlotExt = 1000295000,
+        [NativeName("Name", "VK_OBJECT_TYPE_CUDA_MODULE_NV")]
+        CudaModuleNV = 1000307000,
+        [NativeName("Name", "VK_OBJECT_TYPE_CUDA_FUNCTION_NV")]
+        CudaFunctionNV = 1000307001,
         [NativeName("Name", "VK_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA")]
         BufferCollectionFuchsia = 1000366000,
+        [NativeName("Name", "VK_OBJECT_TYPE_MICROMAP_EXT")]
+        MicromapExt = 1000396000,
+        [NativeName("Name", "VK_OBJECT_TYPE_OPTICAL_FLOW_SESSION_NV")]
+        OpticalFlowSessionNV = 1000464000,
+        [NativeName("Name", "VK_OBJECT_TYPE_SHADER_EXT")]
+        ShaderExt = 1000482000,
+        [NativeName("Name", "VK_OBJECT_TYPE_PIPELINE_BINARY_KHR")]
+        PipelineBinaryKhr = 1000483000,
+        [NativeName("Name", "VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_EXT")]
+        IndirectCommandsLayoutExt = 1000572000,
+        [NativeName("Name", "VK_OBJECT_TYPE_INDIRECT_EXECUTION_SET_EXT")]
+        IndirectExecutionSetExt = 1000572001,
         [NativeName("Name", "VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION")]
         SamplerYcbcrConversion = 1000156000,
         [NativeName("Name", "VK_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE")]
         DescriptorUpdateTemplate = 1000085000,
         [NativeName("Name", "VK_OBJECT_TYPE_PRIVATE_DATA_SLOT")]
         PrivateDataSlot = 1000295000,
+        [NativeName("Name", "VK_OBJECT_TYPE_SEMAPHORE_SCI_SYNC_POOL_NV")]
+        SemaphoreSciSyncPoolNV = 1000489000,
     }
 }
